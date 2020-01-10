@@ -1,0 +1,65 @@
+{
+  "allure": {
+    "directory": "allure-results",
+    "allowEmptySuites": true,
+    "enableParameters": true,
+    "allowLocalHistoryTrend": false,
+    "links": [
+      "https://www.google.com/search?q={issue}",
+      "https://www.google.com/search?q={link}",
+      "https://www.google.com/search?q={tms}"
+    ]
+  },
+
+  "categories": [
+    {
+      "name": "Broken tests",
+      "matchedStatuses": ["broken"]
+    },
+    {
+      "name": "Ignored tests",
+      "matchedStatuses": ["skipped"]
+    },
+    {
+      "name": "Defected tests",
+      "matchedStatuses": ["failed"]
+    },
+    {
+      "name": "Passed tests",
+      "matchedStatuses": ["passed"]
+    }
+  ],
+
+  "specflow": {
+    "stepArguments": {
+      "convertToParameters": "true",
+      "paramNameRegex": "",
+      "paramValueRegex": ""
+    },
+    "grouping": {
+      "suites": {
+        "parentSuite": "^parentSuite:?(.+)",
+        "suite": "^suite:?(.+)",
+        "subSuite": "^subSuite:?(.+)"
+      },
+      "behaviors": {
+        "epic": "^epic:?(.+)",
+        "story": "^story:?(.+)"
+      },
+      "packages": {
+        "package": "^package:?(.+)",
+        "testClass": "^class:?(.+)",
+        "testMethod": "^method:?(.+)"
+      }
+    },
+    "labels": {
+      "owner": "^owner:?(.+)",
+      "severity": "^(normal|blocker|critical|minor|trivial|low)"
+    },
+    "links": {
+      "issue": "^issue:(\\d+)",
+      "tms": "^tms:(\\d+)",
+      "link": "^link:(.+)"
+    }
+  }
+}
