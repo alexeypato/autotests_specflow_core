@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using Framework.Common;
+using Framework.Enums;
 using Framework.Extensions;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;

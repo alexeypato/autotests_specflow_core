@@ -2,8 +2,8 @@
 using System.IO;
 using Allure.Commons;
 using Framework.Common;
+using Framework.Enums;
 using Framework.Extensions;
-using Framework.WebDriverFactory;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using TechTalk.SpecFlow;

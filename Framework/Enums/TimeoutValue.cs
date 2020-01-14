@@ -1,4 +1,4 @@
-﻿namespace Framework.Common
+﻿namespace Framework.Enums
 {
     public enum TimeoutValue
     {

@@ -109,7 +109,8 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.Given("I am navigated to Home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 9
- testRunner.Then("\'Google Search\' text is displayed in the search button on Home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("Text in the search button is displayed according to the current language on Home " +
+                        "page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();

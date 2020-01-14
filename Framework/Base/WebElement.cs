@@ -5,8 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using Framework.Common;
+using Framework.Enums;
 using Framework.Extensions;
-using Framework.WebDriverFactory;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.Extensions;
@@ -17,29 +17,30 @@ namespace Framework.Base
     public class WebElement : IWebElement
     {
         private readonly IWebDriver _driver;
-        private readonly IWebElement _element;
+
+        public readonly IWebElement Element;
 
         public bool Active => GetAttribute("class").Contains("active");
 
         public bool Disabled => GetAttribute("disabled") != null;
 
-        public bool Displayed => _element.Displayed;
+        public bool Displayed => Element.Displayed;
 
-        public bool Enabled => _element.Enabled;
+        public bool Enabled => Element.Enabled;
 
-        public Point Location => _element.Location;
+        public Point Location => Element.Location;
 
         public bool Selected => IsSelected();
 
-        public Size Size => _element.Size;
+        public Size Size => Element.Size;
 
-        public string TagName => _element.TagName;
+        public string TagName => Element.TagName;
 
-        public string Text => _element.Text;
+        public string Text => Element.Text;
 
         public WebElement(IWebDriver driver, IWebElement webElement)
         {
-            _element = webElement;
+            Element = webElement;
             _driver = driver;
         }
 
@@ -51,7 +52,7 @@ namespace Framework.Base
             ScrollIntoView();
             try
             {
-                _driver.ExecuteJavaScript("arguments[0].accept = 'image/*, video/*, application/*, text/*';", _element);
+                _driver.ExecuteJavaScript("arguments[0].accept = 'image/*, video/*, application/*, text/*';", Element);
             }
             catch (Exception exc)
             {
@@ -61,14 +62,14 @@ namespace Framework.Base
 
         public void Blur()
         {
-            _driver.ExecuteJavaScript("arguments[0].blur();", _element);
+            _driver.ExecuteJavaScript("arguments[0].blur();", Element);
         }
 
         public void Clear()
         {
             try
             {
-                _element.Clear();
+                Element.Clear();
             }
             catch (Exception exc)
             {
@@ -80,7 +81,7 @@ namespace Framework.Base
         {
             try
             {
-                _element.Click();
+                Element.Click();
             }
             catch (Exception exc)
             {
@@ -91,14 +92,14 @@ namespace Framework.Base
 
         public void ClickByJs()
         {
-            _driver.ExecuteJavaScript("arguments[0].click();", _element);
+            _driver.ExecuteJavaScript("arguments[0].click();", Element);
         }
 
         public void DisplayElement()
         {
             try
             {
-                _driver.ExecuteJavaScript("arguments[0].style.display = 'block';", _element);
+                _driver.ExecuteJavaScript("arguments[0].style.display = 'block';", Element);
             }
             catch (Exception exc)
             {
@@ -108,7 +109,7 @@ namespace Framework.Base
 
         public IWebElement FindElement(By by)
         {
-            return _element.FindElement(by);
+            return Element.FindElement(by);
         }
 
         public WebElement FindWebElement(By by)
@@ -118,46 +119,46 @@ namespace Framework.Base
 
         public ReadOnlyCollection<IWebElement> FindElements(By by)
         {
-            return _element.FindElements(by);
+            return Element.FindElements(by);
         }
 
         public void Focus()
         {
-            _driver.ExecuteJavaScript("arguments[0].focus();", _element);
+            _driver.ExecuteJavaScript("arguments[0].focus();", Element);
         }
 
         public string GetAttribute(string attributeName)
         {
             try
             {
-                return _element.GetAttribute(attributeName);
+                return Element.GetAttribute(attributeName);
             }
             catch (Exception exc)
             {
                 Console.WriteLine($"Get Attribute exception: {exc.Message}");
-                return _element.GetAttribute(attributeName);
+                return Element.GetAttribute(attributeName);
             }
         }
 
         public string GetCssValue(string propertyName)
         {
-            return _element.GetCssValue(propertyName);
+            return Element.GetCssValue(propertyName);
         }
 
         public string GetProperty(string propertyName)
         {
-            return _element.GetProperty(propertyName);
+            return Element.GetProperty(propertyName);
         }
 
         public string GetTextByJs()
         {
-            return _driver.ExecuteJavaScript<string>("return arguments[0].textContent;", _element);
+            return _driver.ExecuteJavaScript<string>("return arguments[0].textContent;", Element);
         }
 
         public void MoveToElement()
         {
             var actions = new Actions(_driver);
-            actions.MoveToElement(_element);
+            actions.MoveToElement(Element);
             actions.Perform();
         }
 
@@ -165,7 +166,7 @@ namespace Framework.Base
         {
             try
             {
-                _driver.ExecuteJavaScript("arguments[0].scrollIntoView(true);", _element);
+                _driver.ExecuteJavaScript("arguments[0].scrollIntoView(true);", Element);
             }
             catch (Exception exc)
             {
@@ -177,7 +178,7 @@ namespace Framework.Base
         {
             try
             {
-                new SelectElement(_element).SelectByText(value);
+                new SelectElement(Element).SelectByText(value);
             }
             catch (Exception exc)
             {
@@ -202,7 +203,7 @@ namespace Framework.Base
         {
             ClearText();
             Thread.Sleep(TimeSpan.FromSeconds((int)TimeoutValue.Low));
-            _driver.ExecuteJavaScript($"arguments[0].value = '{text}';", _element);
+            _driver.ExecuteJavaScript($"arguments[0].value = '{text}';", Element);
             Thread.Sleep(TimeSpan.FromSeconds((int)TimeoutValue.Low));
             SendKeys(Keys.Right);
             SendKeys(" ");
@@ -220,7 +221,7 @@ namespace Framework.Base
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
             try
             {
-                _element.SendKeys(text);
+                Element.SendKeys(text);
             }
             catch (Exception exc)
             {
@@ -230,7 +231,7 @@ namespace Framework.Base
 
         public void Submit()
         {
-            _element.Submit();
+            Element.Submit();
         }
 
         private void ClearText()
@@ -252,7 +253,7 @@ namespace Framework.Base
         {
             try
             {
-                return _element.Selected;
+                return Element.Selected;
             }
             catch (Exception exc)
             {
@@ -263,7 +264,7 @@ namespace Framework.Base
 
         private bool IsChecked()
         {
-            return bool.Parse(_driver.ExecuteJavaScript<string>("return arguments[0].checked;", _element));
+            return bool.Parse(_driver.ExecuteJavaScript<string>("return arguments[0].checked;", Element));
         }
 
         private void SendKeysWithDelay(string text, int delay = 100)

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading;
+using Framework.Enums;
 using Framework.Extensions;
 using OpenQA.Selenium;
 

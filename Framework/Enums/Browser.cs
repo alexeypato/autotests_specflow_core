@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace Framework.WebDriverFactory
+namespace Framework.Enums
 {
     public enum Browser
     {

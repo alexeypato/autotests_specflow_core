@@ -28,12 +28,13 @@ namespace Project.Steps
             Assert.IsTrue(_homePage.MainImage.Displayed, "Home page is opened");
         }
 
-        [Then(@"'(.*)' text is (displayed|hidden) in the search button on Home page")]
-        public void ThenTextIsDisplayedInTheSearchButtonOnHomePage(string text, bool isExpectedToBeVisible)
+        [Then(@"Text in the search button is (displayed|hidden) according to the current language on Home page")]
+        public void ThenTextInTheSearchButtonIsDisplayedAccordingToTheCurrentLanguageOnHomePage(bool isExpectedToBeVisible)
         {
+            var expectedText = _homePage.GetSearchButtonTitle();
             var actualText = _homePage.SearchButton.GetAttribute("value");
-            Assert.AreEqual(isExpectedToBeVisible, text.Equals(actualText),
-                $"'{text}' expected text, '{actualText}' actual text in the search button on Home page");
+            Assert.AreEqual(isExpectedToBeVisible, expectedText.Equals(actualText),
+                $"'{expectedText}' expected text, '{actualText}' actual text in the search button on Home page");
         }
     }
 }
