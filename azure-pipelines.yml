@@ -18,10 +18,11 @@ variables:
 steps:
 # install the required .NET Core SDK version
 # only necessary if the agent doesn't already have the required SDK
-- task: DotNetCoreInstaller@0
+- task: UseDotNet@2
   displayName: 'Use .NET Core sdk 2.2.x'
   inputs:
-    version: 2.2.x
+    version: '2.2.x'
+    packageType: runtime
 
 # restore Nuget packages/dependencies
 - task: DotNetCoreCLI@2
