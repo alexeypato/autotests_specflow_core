@@ -38,13 +38,6 @@ steps:
     projects: '$(project)'
     arguments: '--configuration $(buildConfiguration)'
 
-- task: DotNetCoreCLI@2
-  displayName: Test
-  inputs:
-    command: test
-    projects: '$(project)'
-    arguments: '--configuration $(buildConfiguration)'
-
 # publish the UI test project to the SeleliumTest subfolder in the Artifact Staging Directory
 # optionally, you can add more steps to publish your own website alongside your SeleniumTests in another task
 - task: DotNetCoreCLI@2
