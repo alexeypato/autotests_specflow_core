@@ -8,6 +8,8 @@ namespace Framework.Enums
         Be,
         [Description("en")]
         En,
+        [Description("en-IE")]
+        EnIe,
         [Description("ru-BY")]
         RuBy,
     }
