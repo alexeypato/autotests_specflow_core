@@ -1,13 +1,18 @@
-# ASP.NET Core (.NET Framework)
-# Build and test ASP.NET Core projects targeting the full .NET Framework.
-# Add steps that publish symbols, save build artifacts, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
-
 trigger:
 - master
 
+strategy:
+  matrix:
+    linux:
+      imageName: "ubuntu-18.04"
+    mac:
+      imageName: "macos-10.14"
+    windows:
+      imageName: "windows-2019"
+  maxParallel: 3
+
 pool:
-  vmImage: 'windows-latest'
+  vmImage: $(imageName)
 
 variables:
   solution: '**/*.sln'
@@ -35,6 +40,12 @@ steps:
   displayName: Build
   inputs:
     command: 'build'
+    projects: '$(project)'
+    arguments: '--configuration $(buildConfiguration)'
+
+- task: DotNetCoreCLI@2
+  inputs:
+    command: test
     projects: '$(project)'
     arguments: '--configuration $(buildConfiguration)'
 
