@@ -9,7 +9,7 @@
 //------------------------------------------------------------------------------
 using NUnit.Framework;
 
-[assembly: LevelOfParallelism(2)]
+[assembly: LevelOfParallelism(1)]
 [assembly: Parallelizable(ParallelScope.Fixtures)]
 [assembly: System.Reflection.AssemblyCompanyAttribute("Project")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
