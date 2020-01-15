@@ -44,6 +44,7 @@ steps:
     arguments: '--configuration $(buildConfiguration)'
 
 - task: DotNetCoreCLI@2
+  displayName: Test
   inputs:
     command: test
     projects: '$(project)'
