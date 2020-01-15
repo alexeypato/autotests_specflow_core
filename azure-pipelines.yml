@@ -53,7 +53,7 @@ steps:
     command: publish
     publishWebProjects: false
     projects: '$(project)'
-    arguments: '--configuration Release -o $(build.artifactstagingdirectory)/SeleniumTests'
+    arguments: '--configuration $(buildConfiguration) -o $(build.artifactstagingdirectory)/Results'
     zipAfterPublish: false
     modifyOutputPath: false
 
