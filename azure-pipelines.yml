@@ -11,24 +11,55 @@ pool:
 
 variables:
   solution: '**/*.sln'
+  project: '**/Project/*.csproj'
   buildPlatform: 'Any CPU'
-  buildConfiguration: 'Release'
+  buildConfiguration: 'Debug'
 
 steps:
-- task: NuGetToolInstaller@1
-
-- task: NuGetCommand@2
+# install the required .NET Core SDK version
+# only necessary if the agent doesn't already have the required SDK
+- task: DotNetCoreInstaller@0
+  displayName: 'Use .NET Core sdk 2.2.x'
   inputs:
-    restoreSolution: '$(solution)'
+    version: 2.2.x
 
-- task: VSBuild@1
+# restore Nuget packages/dependencies
+- task: DotNetCoreCLI@2
+  displayName: Restore
   inputs:
-    solution: '$(solution)'
-    msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:DesktopBuildPackageLocation="$(build.artifactStagingDirectory)\WebApp.zip" /p:DeployIisAppPath="Default Web Site"'
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
+    command: restore
+    projects: '$(project)'
 
-- task: VSTest@2
+- task: DotNetCoreCLI@2
+  displayName: Build
   inputs:
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
+    command: 'build'
+    projects: '$(project)'
+    arguments: '--configuration $(buildConfiguration)'
+
+- task: DotNetCoreCLI@2
+  displayName: Test
+  inputs:
+    command: test
+    projects: '$(project)'
+    arguments: '--configuration $(buildConfiguration)'
+
+# publish the UI test project to the SeleliumTest subfolder in the Artifact Staging Directory
+# optionally, you can add more steps to publish your own website alongside your SeleniumTests in another task
+- task: DotNetCoreCLI@2
+  displayName: Publish
+  inputs:
+    command: publish
+    publishWebProjects: false
+    projects: '$(project)'
+    arguments: '--configuration Release -o $(build.artifactstagingdirectory)/SeleniumTests'
+    zipAfterPublish: false
+    modifyOutputPath: false
+
+# publish all artifacts in the Artifact Stagign Directory
+# this will place the UI Test artifacts in Azure DevOps for future use in the deployment pipeline
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact'
+  inputs:
+    PathtoPublish: '$(build.artifactstagingdirectory)'
+  condition: succeededOrFailed()
