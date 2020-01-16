@@ -10,7 +10,7 @@
 // ------------------------------------------------------------------------------
 #region Designer generated code
 #pragma warning disable
-namespace Project.Features
+namespace ProjectTests.Features
 {
     using TechTalk.SpecFlow;
     using System;
@@ -20,22 +20,22 @@ namespace Project.Features
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.1.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [NUnit.Framework.TestFixtureAttribute()]
-    [NUnit.Framework.DescriptionAttribute("Home Page Test 2")]
-    public partial class HomePageTest2Feature
+    [NUnit.Framework.DescriptionAttribute("Home Page Test 1")]
+    public partial class HomePageTest1Feature
     {
         
         private TechTalk.SpecFlow.ITestRunner testRunner;
         
         private string[] _featureTags = ((string[])(null));
         
-#line 1 "HomePageTest2.feature"
+#line 1 "HomePageTest1.feature"
 #line hidden
         
         [NUnit.Framework.OneTimeSetUpAttribute()]
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Home Page Test 2", "\tVerification of the search button text", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Home Page Test 1", "\tVerification of the home page", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -74,15 +74,15 @@ namespace Project.Features
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Verifying text in search button on the Home page")]
+        [NUnit.Framework.DescriptionAttribute("Verifying the Home page")]
         [NUnit.Framework.CategoryAttribute("link:alexeypato+github")]
         [NUnit.Framework.CategoryAttribute("UiTest")]
-        public virtual void VerifyingTextInSearchButtonOnTheHomePage()
+        public virtual void VerifyingTheHomePage()
         {
             string[] tagsOfScenario = new string[] {
                     "link:alexeypato+github",
                     "UiTest"};
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Verifying text in search button on the Home page", null, new string[] {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Verifying the Home page", null, new string[] {
                         "link:alexeypato+github",
                         "UiTest"});
 #line 7
@@ -109,8 +109,7 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.Given("I am navigated to Home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 9
- testRunner.Then("Text in the search button is displayed according to the current language on Home " +
-                        "page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("Home page is opened", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();

@@ -9,7 +9,7 @@ using Framework.Extensions;
 using NUnit.Framework;
 using TechTalk.SpecFlow;
 
-namespace Project.Hooks
+namespace ProjectTests.Hooks
 {
     [Binding]
     public class AfterHooks : Hooks

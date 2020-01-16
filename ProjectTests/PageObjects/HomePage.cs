@@ -5,7 +5,7 @@ using Framework.Extensions;
 using log4net;
 using OpenQA.Selenium;
 
-namespace Project.PageObjects
+namespace ProjectTests.PageObjects
 {
     public class HomePage : PageBase
     {

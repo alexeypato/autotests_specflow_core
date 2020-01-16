@@ -1,10 +1,10 @@
 ﻿using Framework.Base;
 using Framework.Common;
 using NUnit.Framework;
-using Project.PageObjects;
+using ProjectTests.PageObjects;
 using TechTalk.SpecFlow;
 
-namespace Project.Steps
+namespace ProjectTests.Steps
 {
     [Binding]
     public class HomePageSteps : StepsBase

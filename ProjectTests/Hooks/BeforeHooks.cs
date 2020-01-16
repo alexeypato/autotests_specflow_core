@@ -7,7 +7,7 @@ using OpenQA.Selenium.Support.Extensions;
 using TechTalk.SpecFlow;
 using ContextKey = Framework.Extensions.ContextKey;
 
-namespace Project.Hooks
+namespace ProjectTests.Hooks
 {
     [Binding]
     public class BeforeHooks : Hooks

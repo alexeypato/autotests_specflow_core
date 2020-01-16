@@ -9,7 +9,7 @@ using NUnit.Framework;
 using OpenQA.Selenium;
 using TechTalk.SpecFlow;
 
-namespace Project.Hooks
+namespace ProjectTests.Hooks
 {
     [Binding]
     public class Hooks : TechTalk.SpecFlow.Steps

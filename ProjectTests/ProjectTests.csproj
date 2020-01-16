@@ -17,10 +17,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <SpecFlowObsoleteCodeBehindFiles Remove="Features\HomePageTests - Copy.feature.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Framework\Framework.csproj" />
   </ItemGroup>
 
@@ -57,19 +53,6 @@
     <PackageReference Include="SpecFlow.NUnit" Version="3.1.78" />
     <PackageReference Include="SpecFlow.Tools.MsBuild.Generation" Version="3.1.78" />
     <PackageReference Include="WebDriverManager" Version="2.7.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Update="Features\HomePageTest2.feature.cs">
-      <DependentUpon>HomePageTest2.feature</DependentUpon>
-    </Compile>
-  </ItemGroup>
-
-  <ItemGroup>
-    <SpecFlowFeatureFiles Update="Features\HomePageTest2.feature">
-      <Visible>$(UsingMicrosoftNETSdk)</Visible>
-      <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
-    </SpecFlowFeatureFiles>
   </ItemGroup>
 
 </Project>

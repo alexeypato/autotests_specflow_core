@@ -1,6 +1,6 @@
 ﻿using TechTalk.SpecFlow;
 
-namespace Project.Steps.Transformations
+namespace ProjectTests.Steps.Transformations
 {
     [Binding]
     public class StepArgumentTransformations
