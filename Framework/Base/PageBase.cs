@@ -5,6 +5,7 @@ using System.Linq;
 using Framework.Common;
 using Framework.Enums;
 using Framework.Extensions;
+using log4net;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.Extensions;
 using OpenQA.Selenium.Support.UI;
@@ -16,6 +17,8 @@ namespace Framework.Base
     {
         private const int DefaultTimeout = (int)TimeoutValue.High;
         private readonly IWebDriver _driver;
+
+        private static readonly ILog Logger = LogManager.GetLogger(typeof(PageBase));
 
         public PageBase(IWebDriver driver)
         {
@@ -40,9 +43,9 @@ namespace Framework.Base
             {
                 element = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(locator));
             }
-            catch (Exception exception)
+            catch (Exception exc)
             {
-                Console.WriteLine(exception.Message);
+                Logger.Error("\nException ---\n{0}" + exc.StackTrace);
             }
             return new WebElement(_driver, element);
         }
@@ -55,9 +58,9 @@ namespace Framework.Base
             {
                 element = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(locator));
             }
-            catch (Exception exception)
+            catch (Exception exc)
             {
-                Console.WriteLine(exception.Message);
+                Logger.Error("\nException ---\n{0}" + exc.StackTrace);
             }
             return new WebElement(_driver, element);
         }
@@ -70,9 +73,9 @@ namespace Framework.Base
             {
                 element = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(locator));
             }
-            catch (Exception exception)
+            catch (Exception exc)
             {
-                Console.WriteLine(exception.Message);
+                Logger.Error("\nException ---\n{0}" + exc.StackTrace);
             }
             return new WebElement(_driver, element);
         }
@@ -115,7 +118,7 @@ namespace Framework.Base
             }
 
             if (logBlockItems.Count > 0)
-                Console.WriteLine($"Item didn't found. XPath: {logBlockItems.Last()}");
+                Logger.Error($"Item didn't found. XPath: {logBlockItems.Last()}");
             return false;
         }
 
@@ -129,7 +132,7 @@ namespace Framework.Base
             }
             catch (Exception exc)
             {
-                Console.WriteLine($"Waiting for element {locator} to be invisible caused an exception: {exc.Message}");
+                Logger.Error($"Waiting for element {locator} to be invisible caused an exception: {exc.StackTrace}");
             }
 
             return isInvisible;
@@ -177,7 +180,7 @@ namespace Framework.Base
             }
             catch (Exception exc)
             {
-                Console.WriteLine($"Scroll To Element exception: {exc.Message}");
+                Logger.Error($"Scroll To Element exception: {exc.StackTrace}");
             }
         }
 

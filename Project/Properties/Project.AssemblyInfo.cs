@@ -9,6 +9,7 @@
 //------------------------------------------------------------------------------
 using NUnit.Framework;
 
+[assembly: log4net.Config.XmlConfigurator(ConfigFile = "log4net.config.xml", Watch = true)]
 [assembly: LevelOfParallelism(1)]
 [assembly: Parallelizable(ParallelScope.Fixtures)]
 [assembly: System.Reflection.AssemblyCompanyAttribute("Project")]

@@ -4,6 +4,7 @@ using Allure.Commons;
 using Framework.Common;
 using Framework.Enums;
 using Framework.Extensions;
+using log4net;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using TechTalk.SpecFlow;
@@ -14,6 +15,7 @@ namespace Project.Hooks
     public class Hooks : TechTalk.SpecFlow.Steps
     {
         protected static readonly Browser BrowserType = ConfigReader.BrowserType;
+        protected static readonly ILog Logger = LogManager.GetLogger(typeof(Hooks));
         protected IWebDriver Driver;
         protected new readonly ScenarioContext ScenarioContext;
         protected readonly AllureLifecycle AllureLifecycle;
