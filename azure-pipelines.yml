@@ -55,6 +55,12 @@ steps:
     projects: '$(project)'
     arguments: '--configuration $(buildConfiguration)'
 
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: '$(System.DefaultWorkingDirectory)/ProjectTests/bin/Debug/netcoreapp2.2'
+    Contents: '**'
+    TargetFolder: '$(build.artifactstagingdirectory)'
+
 # publish the UI test project to the SeleliumTest subfolder in the Artifact Staging Directory
 # optionally, you can add more steps to publish your own website alongside your SeleniumTests in another task
 - task: DotNetCoreCLI@2
@@ -63,7 +69,7 @@ steps:
     command: publish
     publishWebProjects: false
     projects: '$(project)'
-    arguments: '--configuration $(buildConfiguration) -o $(build.artifactstagingdirectory)/Results'
+    arguments: '--configuration $(buildConfiguration) -o $(build.artifactstagingdirectory)'
     zipAfterPublish: false
     modifyOutputPath: false
 
