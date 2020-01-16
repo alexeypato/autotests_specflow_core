@@ -60,6 +60,7 @@ steps:
     SourceFolder: '$(System.DefaultWorkingDirectory)/ProjectTests/bin/Debug/netcoreapp2.2'
     Contents: '**'
     TargetFolder: '$(build.artifactstagingdirectory)'
+  condition: succeededOrFailed()
 
 # publish the UI test project to the SeleliumTest subfolder in the Artifact Staging Directory
 # optionally, you can add more steps to publish your own website alongside your SeleniumTests in another task
@@ -72,6 +73,7 @@ steps:
     arguments: '--configuration $(buildConfiguration) -o $(build.artifactstagingdirectory)'
     zipAfterPublish: false
     modifyOutputPath: false
+  condition: succeededOrFailed()
 
 # publish all artifacts in the Artifact Stagign Directory
 # this will place the UI Test artifacts in Azure DevOps for future use in the deployment pipeline
