@@ -1,5 +1,5 @@
 schedules:
-- cron: "0 0 * * *"
+- cron: "0 0 * * 1-5/2"
   displayName: Daily midnight build
   branches:
     include:
@@ -10,11 +10,19 @@ trigger:
 
 strategy:
   matrix:
-    mac:
+    MacOs Chrome:
       imageName: "macos-10.14"
-    windows:
+      BROWSER: "Chrome"
+    MacOs Firefox:
+      imageName: "macos-10.14"
+      BROWSER: "Firefox"
+    Windows Chrome:
       imageName: "windows-2019"
-  maxParallel: 3
+      BROWSER: "Chrome"
+    Windows Firefox:
+      imageName: "windows-2019"
+      BROWSER: "Firefox"
+  maxParallel: 10
 
 pool:
   vmImage: $(imageName)
