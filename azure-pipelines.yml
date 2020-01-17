@@ -10,6 +10,9 @@ trigger:
 
 strategy:
   matrix:
+    Linux Firefox:
+      imageName: "ubuntu-latest"
+      BROWSER: "Firefox"
     MacOs Chrome:
       imageName: "macos-10.14"
       BROWSER: "Chrome"
@@ -17,10 +20,10 @@ strategy:
       imageName: "macos-10.14"
       BROWSER: "Firefox"
     Windows Chrome:
-      imageName: "windows-2019"
+      imageName: "windows-latest"
       BROWSER: "Chrome"
     Windows Firefox:
-      imageName: "windows-2019"
+      imageName: "windows-latest"
       BROWSER: "Firefox"
   maxParallel: 10
 

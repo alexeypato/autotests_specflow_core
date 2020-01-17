@@ -11,7 +11,6 @@ using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.IE;
 using WebDriverManager;
 using WebDriverManager.DriverConfigs.Impl;
-using WebDriverManager.Helpers;
 
 namespace Framework.WebDriverFactory
 {
@@ -35,7 +34,7 @@ namespace Framework.WebDriverFactory
                     driver = new EdgeDriver(GetEdgeOptions());
                     break;
                 case Browser.Firefox:
-                    new DriverManager().SetUpDriver(new FirefoxConfig(), architecture: Architecture.X64);
+                    new DriverManager().SetUpDriver(new FirefoxConfig());
                     driver = new FirefoxDriver(GetFirefoxOptions());
                     break;
                 case Browser.IE:

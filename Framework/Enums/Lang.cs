@@ -10,6 +10,8 @@ namespace Framework.Enums
         En,
         [Description("en-IE")]
         EnIe,
+        [Description("fr")]
+        Fr,
         [Description("ru-BY")]
         RuBy,
     }
