@@ -9,7 +9,6 @@ using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Edge;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.IE;
-using OpenQA.Selenium.Remote;
 using OpenQA.Selenium.Safari;
 using WebDriverManager;
 using WebDriverManager.DriverConfigs.Impl;
@@ -22,6 +21,7 @@ namespace Framework.WebDriverFactory
         private static Config ConfigInstance => Config.Instance;
         private static string DownloadsDir => $"{ConfigReader.BaseDirectory}{Path.DirectorySeparatorChar}downloads";
         private static readonly ILog Logger = LogManager.GetLogger(typeof(WebDriver));
+        private static readonly bool IsWindows = (int)Environment.OSVersion.Platform < 4;
 
         public static IWebDriver GetWebDriver(Browser browser)
         {
@@ -37,7 +37,8 @@ namespace Framework.WebDriverFactory
                     driver = new EdgeDriver(GetEdgeOptions());
                     break;
                 case Browser.Firefox:
-                    new DriverManager().SetUpDriver(new FirefoxConfig(), architecture: Architecture.X64);
+                    var conf = new FirefoxConfig().GetName();
+                    new DriverManager().SetUpDriver(new FirefoxConfig(), architecture: IsWindows ? Architecture.X64 : Architecture.Auto);
                     driver = new FirefoxDriver(GetFirefoxOptions());
                     break;
                 case Browser.IE:
