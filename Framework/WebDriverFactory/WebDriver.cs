@@ -129,8 +129,6 @@ namespace Framework.WebDriverFactory
         private static SafariOptions GetSafariOptions()
         {
             var options = new SafariOptions();
-            options.AddAdditionalCapability(CapabilityType.AcceptSslCertificates, true);
-            options.AddAdditionalCapability(CapabilityType.AcceptInsecureCertificates, true);
             options.AddAdditionalCapability("cleanSession", true);
             return options;
         }
