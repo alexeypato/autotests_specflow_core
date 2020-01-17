@@ -27,6 +27,8 @@ namespace ProjectTests.PageObjects
             {
                 case Lang.Be:
                     return "Пошук Google";
+                case Lang.Fr:
+                    return "Recherche Google";
                 case Lang.RuBy:
                     return "Поиск в Google";
                 default:

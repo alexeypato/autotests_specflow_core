@@ -11,6 +11,7 @@ using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.IE;
 using WebDriverManager;
 using WebDriverManager.DriverConfigs.Impl;
+using WebDriverManager.Helpers;
 
 namespace Framework.WebDriverFactory
 {
@@ -34,7 +35,7 @@ namespace Framework.WebDriverFactory
                     driver = new EdgeDriver(GetEdgeOptions());
                     break;
                 case Browser.Firefox:
-                    new DriverManager().SetUpDriver(new FirefoxConfig());
+                    new DriverManager().SetUpDriver(new FirefoxConfig(), architecture: Architecture.X64);
                     driver = new FirefoxDriver(GetFirefoxOptions());
                     break;
                 case Browser.IE:
@@ -82,11 +83,11 @@ namespace Framework.WebDriverFactory
             firefoxProfile.SetPreference("intl.accept_languages", ConfigInstance.Language);
 
             var firefoxOptions = new FirefoxOptions { Profile = firefoxProfile };
-            firefoxOptions.SetLoggingPreference(LogType.Driver, LogLevel.Info);
-            firefoxOptions.SetLoggingPreference(LogType.Browser, LogLevel.Debug);
-            firefoxOptions.SetLoggingPreference(LogType.Client, LogLevel.All);
-            firefoxOptions.SetLoggingPreference(LogType.Profiler, LogLevel.All);
-            firefoxOptions.SetLoggingPreference(LogType.Server, LogLevel.All);
+            firefoxOptions.SetLoggingPreference(LogType.Driver, LogLevel.Off);
+            firefoxOptions.SetLoggingPreference(LogType.Browser, LogLevel.Off);
+            firefoxOptions.SetLoggingPreference(LogType.Client, LogLevel.Off);
+            firefoxOptions.SetLoggingPreference(LogType.Profiler, LogLevel.Off);
+            firefoxOptions.SetLoggingPreference(LogType.Server, LogLevel.Off);
             firefoxOptions.LogLevel = FirefoxDriverLogLevel.Debug;
 
             return firefoxOptions;
