@@ -19,6 +19,9 @@ strategy:
     MacOs Firefox:
       imageName: "macos-10.14"
       BROWSER: "Firefox"
+    MacOs Safari:
+      imageName: "macos-10.14"
+      BROWSER: "Safari"
     Windows Chrome:
       imageName: "windows-latest"
       BROWSER: "Chrome"

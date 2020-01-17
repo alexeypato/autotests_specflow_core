@@ -31,6 +31,7 @@ namespace ProjectTests.Hooks
                 AllureLifecycle.AddAttachment(path);
             }
 
+            Driver.Quit();
             Driver.Dispose();
 
             AllureHackForScenarioOutlineTests();

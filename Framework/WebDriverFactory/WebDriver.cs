@@ -9,6 +9,8 @@ using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Edge;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.IE;
+using OpenQA.Selenium.Remote;
+using OpenQA.Selenium.Safari;
 using WebDriverManager;
 using WebDriverManager.DriverConfigs.Impl;
 using WebDriverManager.Helpers;
@@ -41,6 +43,9 @@ namespace Framework.WebDriverFactory
                 case Browser.IE:
                     new DriverManager().SetUpDriver(new InternetExplorerConfig());
                     driver = new InternetExplorerDriver(GetInternetExplorerOptions());
+                    break;
+                case Browser.Safari:
+                    driver = new SafariDriver(GetSafariOptions());
                     break;
                 default:
                     Logger.Error($"Browser '{browser.ToDescription()}' is not supported");
@@ -119,6 +124,15 @@ namespace Framework.WebDriverFactory
             };
 
             return internetExplorerOptions;
+        }
+
+        private static SafariOptions GetSafariOptions()
+        {
+            var options = new SafariOptions();
+            options.AddAdditionalCapability(CapabilityType.AcceptSslCertificates, true);
+            options.AddAdditionalCapability(CapabilityType.AcceptInsecureCertificates, true);
+            options.AddAdditionalCapability("cleanSession", true);
+            return options;
         }
     }
 }
