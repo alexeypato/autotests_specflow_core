@@ -21,7 +21,6 @@ namespace Framework.WebDriverFactory
         private static Config ConfigInstance => Config.Instance;
         private static string DownloadsDir => $"{ConfigReader.BaseDirectory}{Path.DirectorySeparatorChar}downloads";
         private static readonly ILog Logger = LogManager.GetLogger(typeof(WebDriver));
-        private static readonly bool IsWindows = (int)Environment.OSVersion.Platform < 4;
 
         public static IWebDriver GetWebDriver(Browser browser)
         {
@@ -33,11 +32,11 @@ namespace Framework.WebDriverFactory
                     driver = new ChromeDriver(GetChromeOptions());
                     break;
                 case Browser.Edge:
-                    new DriverManager().SetUpDriver(new EdgeConfig());
+                    new DriverManager().SetUpDriver(new EdgeConfig(), architecture: Architecture.X64);
                     driver = new EdgeDriver(GetEdgeOptions());
                     break;
                 case Browser.Firefox:
-                    new DriverManager().SetUpDriver(new FirefoxConfig(), architecture: IsWindows ? Architecture.X64 : Architecture.Auto);
+                    new DriverManager().SetUpDriver(new MyFirefoxConfig());
                     driver = new FirefoxDriver(GetFirefoxOptions());
                     break;
                 case Browser.IE:
@@ -96,7 +95,7 @@ namespace Framework.WebDriverFactory
             firefoxOptions.SetLoggingPreference(LogType.Client, LogLevel.Off);
             firefoxOptions.SetLoggingPreference(LogType.Profiler, LogLevel.Off);
             firefoxOptions.SetLoggingPreference(LogType.Server, LogLevel.Off);
-            firefoxOptions.LogLevel = FirefoxDriverLogLevel.Debug;
+            firefoxOptions.LogLevel = FirefoxDriverLogLevel.Info;
 
             return firefoxOptions;
         }
