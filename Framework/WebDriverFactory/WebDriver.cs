@@ -33,11 +33,10 @@ namespace Framework.WebDriverFactory
                     driver = new ChromeDriver(GetChromeOptions());
                     break;
                 case Browser.Edge:
-                    new DriverManager().SetUpDriver(new LegacyEdgeConfig());
+                    new DriverManager().SetUpDriver(new EdgeConfig());
                     driver = new EdgeDriver(GetEdgeOptions());
                     break;
                 case Browser.Firefox:
-                    var conf = new FirefoxConfig().GetName();
                     new DriverManager().SetUpDriver(new FirefoxConfig(), architecture: IsWindows ? Architecture.X64 : Architecture.Auto);
                     driver = new FirefoxDriver(GetFirefoxOptions());
                     break;
@@ -59,6 +58,9 @@ namespace Framework.WebDriverFactory
         private static ChromeOptions GetChromeOptions()
         {
             var chromeOptions = new ChromeOptions();
+            chromeOptions.AddArgument("--headless");
+            chromeOptions.AddArgument("--no-sandbox");
+            chromeOptions.AddArgument("--disable-dev-shm-usage");
             chromeOptions.AddUserProfilePreference("intl.accept_languages", ConfigInstance.Language);
             chromeOptions.AddUserProfilePreference("disable-popup-blocking", "true");
             chromeOptions.AddUserProfilePreference("download.prompt_for_download", "false");
