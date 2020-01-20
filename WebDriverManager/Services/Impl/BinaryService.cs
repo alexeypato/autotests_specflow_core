@@ -31,7 +31,7 @@ namespace WebDriverManager.Services.Impl
             }
             else if (zipDestination.EndsWith(".tar.gz", StringComparison.OrdinalIgnoreCase))
             {
-                ExtractTGZ(zipDestination, binDestination);
+                UnZipTGZ(zipDestination, binDestination);
             }
 
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux) ||
@@ -82,8 +82,10 @@ namespace WebDriverManager.Services.Impl
             }
         }
 
-        public void ExtractTGZ(String gzArchiveName, String destFolder)
+        protected void UnZipTGZ(String gzArchiveName, String destFolder)
         {
+            Console.WriteLine(gzArchiveName);
+            Console.WriteLine(destFolder);
             Stream inStream = File.OpenRead(gzArchiveName);
             Stream gzipStream = new GZipInputStream(inStream);
 
