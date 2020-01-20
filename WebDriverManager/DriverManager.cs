@@ -1,4 +1,5 @@
-﻿using WebDriverManager.DriverConfigs;
+﻿using System;
+using WebDriverManager.DriverConfigs;
 using WebDriverManager.Helpers;
 using WebDriverManager.Services;
 using WebDriverManager.Services.Impl;
@@ -39,6 +40,7 @@ namespace WebDriverManager
             var binaryPath = FileHelper.GetBinDestination(config.GetName(), version, architecture,
                 config.GetBinaryName());
             SetUpDriver(url, binaryPath, config.GetBinaryName());
+            Console.WriteLine(binaryPath);
         }
     }
 }
