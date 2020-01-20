@@ -4,8 +4,8 @@ using System.IO;
 using System.IO.Compression;
 using System.Net;
 using System.Runtime.InteropServices;
-using ICSharpCode.SharpZipLib.Core;
 using ICSharpCode.SharpZipLib.GZip;
+using ICSharpCode.SharpZipLib.Tar;
 using WebDriverManager.Helpers;
 
 namespace WebDriverManager.Services.Impl
@@ -31,7 +31,7 @@ namespace WebDriverManager.Services.Impl
             }
             else if (zipDestination.EndsWith(".tar.gz", StringComparison.OrdinalIgnoreCase))
             {
-                ExtractGZipFile(zipDestination, binDestination);
+                ExtractTGZ(zipDestination, binDestination);
             }
 
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux) ||
@@ -82,28 +82,17 @@ namespace WebDriverManager.Services.Impl
             }
         }
 
-        protected string ExtractGZipFile(string gzipFileName, string targetDir)
+        public void ExtractTGZ(String gzArchiveName, String destFolder)
         {
+            Stream inStream = File.OpenRead(gzArchiveName);
+            Stream gzipStream = new GZipInputStream(inStream);
 
-            // Use a 4K buffer. Any larger is a waste.    
-            var dataBuffer = new byte[4096];
+            TarArchive tarArchive = TarArchive.CreateInputTarArchive(gzipStream);
+            tarArchive.ExtractContents(destFolder);
+            tarArchive.Close();
 
-            using (Stream fs = new FileStream(gzipFileName, FileMode.Open, FileAccess.Read))
-            {
-                using (var gzipStream = new GZipInputStream(fs))
-                {
-
-                    // Change this to your needs
-                    var fnOut = Path.Combine(targetDir, Path.GetFileNameWithoutExtension(gzipFileName));
-
-                    using (var fsOut = File.Create(fnOut))
-                    {
-                        StreamUtils.Copy(gzipStream, fsOut, dataBuffer);
-                    }
-
-                    return fnOut;
-                }
-            }
+            gzipStream.Close();
+            inStream.Close();
         }
 
         protected void RemoveZip(string path)
