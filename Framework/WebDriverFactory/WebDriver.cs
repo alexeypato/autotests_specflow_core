@@ -36,7 +36,7 @@ namespace Framework.WebDriverFactory
                     driver = new EdgeDriver(GetEdgeOptions());
                     break;
                 case Browser.Firefox:
-                    new DriverManager().SetUpDriver(new MyFirefoxConfig());
+                    new DriverManager().SetUpDriver(new FirefoxConfig());
                     driver = new FirefoxDriver(GetFirefoxOptions());
                     break;
                 case Browser.IE:

@@ -2,23 +2,22 @@
 using System.Net;
 using System.Runtime.InteropServices;
 using AngleSharp.Html.Parser;
-using WebDriverManager.DriverConfigs.Impl;
 
-namespace Framework.WebDriverFactory
+namespace WebDriverManager.DriverConfigs.Impl
 {
-    public class MyFirefoxConfig : FirefoxConfig
+    public class FirefoxConfig : IDriverConfig
     {
-        public override string GetName()
+        public virtual string GetName()
         {
             return "Firefox";
         }
 
-        public override string GetUrl32()
+        public virtual string GetUrl32()
         {
             return GetUrl();
         }
 
-        public override string GetUrl64()
+        public virtual string GetUrl64()
         {
             return GetUrl();
         }
@@ -30,12 +29,12 @@ namespace Framework.WebDriverFactory
             return RuntimeInformation.IsOSPlatform(OSPlatform.Linux) ? "https://github.com/mozilla/geckodriver/releases/download/v<version>/geckodriver-v<version>-linux64.tar.gz" : "https://github.com/mozilla/geckodriver/releases/download/v<version>/geckodriver-v<version>-win64.zip";
         }
 
-        public override string GetBinaryName()
+        public virtual string GetBinaryName()
         {
             return "geckodriver" + (RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? ".exe" : string.Empty);
         }
 
-        public override string GetLatestVersion()
+        public virtual string GetLatestVersion()
         {
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
             using (var webClient = new WebClient())
