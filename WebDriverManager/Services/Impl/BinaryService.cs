@@ -84,13 +84,12 @@ namespace WebDriverManager.Services.Impl
 
         protected void UnZipTGZ(String gzArchiveName, String destFolder)
         {
-            Console.WriteLine(gzArchiveName);
-            Console.WriteLine(destFolder);
+            var destination = destFolder.Substring(0,destFolder.LastIndexOf(Path.PathSeparator));
             Stream inStream = File.OpenRead(gzArchiveName);
             Stream gzipStream = new GZipInputStream(inStream);
 
             TarArchive tarArchive = TarArchive.CreateInputTarArchive(gzipStream);
-            tarArchive.ExtractContents(destFolder);
+            tarArchive.ExtractContents(destination);
             tarArchive.Close();
 
             gzipStream.Close();
