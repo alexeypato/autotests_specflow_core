@@ -85,6 +85,7 @@ namespace WebDriverManager.Services.Impl
         protected void UnZipTGZ(String gzArchiveName, String destFolder)
         {
             var destination = destFolder.Substring(0,destFolder.LastIndexOf('/'));
+            Console.WriteLine(destination);
             Stream inStream = File.OpenRead(gzArchiveName);
             Stream gzipStream = new GZipInputStream(inStream);
 
