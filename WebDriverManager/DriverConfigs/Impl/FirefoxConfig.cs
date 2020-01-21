@@ -26,7 +26,7 @@ namespace WebDriverManager.DriverConfigs.Impl
         {
             if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
                 return "https://github.com/mozilla/geckodriver/releases/download/v<version>/geckodriver-v<version>-macos.tar.gz";
-            return RuntimeInformation.IsOSPlatform(OSPlatform.Linux) ? "https://github.com/mozilla/geckodriver/releases/download/v<version>/geckodriver-v<version>-linux64.tar.gz" : "https://github.com/mozilla/geckodriver/releases/download/v<version>/geckodriver-v<version>-win64.zip";
+            return RuntimeInformation.IsOSPlatform(OSPlatform.Linux) ? "https://github.com/mozilla/geckodriver/releases/download/v<version>/geckodriver-v<version>-linux32.tar.gz" : "https://github.com/mozilla/geckodriver/releases/download/v<version>/geckodriver-v<version>-win64.zip";
         }
 
         public virtual string GetBinaryName()

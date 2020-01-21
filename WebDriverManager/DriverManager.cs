@@ -8,6 +8,8 @@ namespace WebDriverManager
 {
     public class DriverManager
     {
+        private static readonly object _object = new object();
+
         private readonly IBinaryService _binaryService;
         private readonly IVariableService _variableService;
 
@@ -34,14 +36,18 @@ namespace WebDriverManager
         public void SetUpDriver(IDriverConfig config, string version = "Latest",
             Architecture architecture = Architecture.Auto)
         {
-            architecture = architecture.Equals(Architecture.Auto) ? ArchitectureHelper.GetArchitecture() : architecture;
-            version = version.Equals("Latest") ? config.GetLatestVersion() : version;
-            var url = architecture.Equals(Architecture.X32) ? config.GetUrl32() : config.GetUrl64();
-            url = UrlHelper.BuildUrl(url, version);
-            var binaryPath = FileHelper.GetBinDestination(config.GetName(), version, architecture,
-                config.GetBinaryName());
-            SetUpDriver(url, binaryPath, config.GetBinaryName());
-            Console.WriteLine("SetUpDriver: " + binaryPath);
+            lock (_object)
+            {
+                architecture = architecture.Equals(Architecture.Auto)
+                    ? ArchitectureHelper.GetArchitecture()
+                    : architecture;
+                version = version.Equals("Latest") ? config.GetLatestVersion() : version;
+                var url = architecture.Equals(Architecture.X32) ? config.GetUrl32() : config.GetUrl64();
+                url = UrlHelper.BuildUrl(url, version);
+                var binaryPath = FileHelper.GetBinDestination(config.GetName(), version, architecture,
+                    config.GetBinaryName());
+                SetUpDriver(url, binaryPath, config.GetBinaryName());
+            }
         }
     }
 }
