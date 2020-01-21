@@ -2,7 +2,6 @@
 using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
-using System.Linq;
 using System.Net;
 using System.Runtime.InteropServices;
 using ICSharpCode.SharpZipLib.GZip;
@@ -84,16 +83,13 @@ namespace WebDriverManager.Services.Impl
             {
                 using (var gzipStream = new GZipInputStream(inStream))
                 {
-                    var destFolder = Path.GetDirectoryName(destination) + Path.DirectorySeparatorChar;
+                    var destFolder = Path.GetDirectoryName(destination);
                     Console.WriteLine("destination: " + destination);
                     Console.WriteLine("destFolder: " + destFolder);
                     using (var tarArchive = TarArchive.CreateInputTarArchive(gzipStream))
                     {
                         tarArchive.ExtractContents(destFolder);
                     }
-                    var filePaths = Directory.GetFiles(destFolder, "*",
-                        SearchOption.AllDirectories).ToList();
-                    filePaths.ForEach(filePath => Console.WriteLine("File:" + filePath));
                 }
             }
         }

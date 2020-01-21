@@ -88,6 +88,7 @@ namespace Framework.WebDriverFactory
             firefoxProfile.SetPreference("profile.accept_untrusted_certs", true);
             firefoxProfile.SetPreference("dom.successive_dialog_time_limit", 0);
             firefoxProfile.SetPreference("intl.accept_languages", ConfigInstance.Language);
+            firefoxProfile.SetPreference("headless", true);
 
             var firefoxOptions = new FirefoxOptions { Profile = firefoxProfile };
             firefoxOptions.SetLoggingPreference(LogType.Driver, LogLevel.Off);
