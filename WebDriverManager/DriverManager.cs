@@ -28,6 +28,7 @@ namespace WebDriverManager
             var zipPath = FileHelper.GetZipDestination(url);
             binaryPath = _binaryService.SetupBinary(url, zipPath, binaryPath, binaryName);
             _variableService.SetupVariable(binaryPath);
+            Console.WriteLine("Binary variable: " + binaryPath);
         }
 
         public void SetUpDriver(IDriverConfig config, string version = "Latest",
@@ -40,7 +41,7 @@ namespace WebDriverManager
             var binaryPath = FileHelper.GetBinDestination(config.GetName(), version, architecture,
                 config.GetBinaryName());
             SetUpDriver(url, binaryPath, config.GetBinaryName());
-            Console.WriteLine(binaryPath);
+            Console.WriteLine("SetUpDriver: " + binaryPath);
         }
     }
 }
