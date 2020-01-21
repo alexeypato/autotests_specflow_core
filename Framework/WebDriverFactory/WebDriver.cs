@@ -88,7 +88,6 @@ namespace Framework.WebDriverFactory
             firefoxProfile.SetPreference("profile.accept_untrusted_certs", true);
             firefoxProfile.SetPreference("dom.successive_dialog_time_limit", 0);
             firefoxProfile.SetPreference("intl.accept_languages", ConfigInstance.Language);
-            firefoxProfile.SetPreference("headless", true);
 
             var firefoxOptions = new FirefoxOptions { Profile = firefoxProfile };
             firefoxOptions.SetLoggingPreference(LogType.Driver, LogLevel.Off);
@@ -97,6 +96,7 @@ namespace Framework.WebDriverFactory
             firefoxOptions.SetLoggingPreference(LogType.Profiler, LogLevel.Off);
             firefoxOptions.SetLoggingPreference(LogType.Server, LogLevel.Off);
             firefoxOptions.LogLevel = FirefoxDriverLogLevel.Default;
+            firefoxOptions.AddArgument("-headless");
 
             return firefoxOptions;
         }
