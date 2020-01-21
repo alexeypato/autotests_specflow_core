@@ -49,12 +49,15 @@ variables:
   buildConfiguration: 'Debug'
 
 steps:
-# install the required .NET Core SDK version
-# only necessary if the agent doesn't already have the required SDK
 - script: |
       sudo apt install firefox
-  displayName: 'Install Firefox'
+  displayName: 'Install Firefox on Linux'
   condition: and(contains(variables.BROWSER, 'Firefox'), contains(variables.imageName, 'ubuntu-latest'))
+
+- script: |
+      brew cask install firefox
+  displayName: 'Install Firefox on Mac Os'
+  condition: and(contains(variables.BROWSER, 'Firefox'), contains(variables.imageName, 'macos-10.14'))
 
 - task: UseDotNet@2
   displayName: 'Use .NET Core sdk 2.2.x'
