@@ -95,7 +95,7 @@ namespace Framework.WebDriverFactory
             firefoxOptions.SetLoggingPreference(LogType.Client, LogLevel.Off);
             firefoxOptions.SetLoggingPreference(LogType.Profiler, LogLevel.Off);
             firefoxOptions.SetLoggingPreference(LogType.Server, LogLevel.Off);
-            firefoxOptions.LogLevel = FirefoxDriverLogLevel.Info;
+            firefoxOptions.LogLevel = FirefoxDriverLogLevel.Default;
 
             return firefoxOptions;
         }
