@@ -47,7 +47,7 @@ namespace WebDriverManager
                 var binaryPath = FileHelper.GetBinDestination(config.GetName(), version, architecture,
                     config.GetBinaryName());
                 SetUpDriver(url, binaryPath, config.GetBinaryName());
-                Console.WriteLine("Arch: " + Architecture.Auto);
+                Console.WriteLine("Arch: " + architecture);
                 Console.WriteLine("System.Environment.Is64BitOperatingSystem: " + Environment.Is64BitOperatingSystem);
             }
         }
