@@ -52,9 +52,9 @@ steps:
 # install the required .NET Core SDK version
 # only necessary if the agent doesn't already have the required SDK
 - script: |
-      sudo apt install google-chrome-stable
-  displayName: 'Install Chrome'
-  condition: and(contains(variables.BROWSER, 'Chrome'), contains(variables.imageName, 'ubuntu-latest'))
+      sudo apt install firefox
+  displayName: 'Install Firefox'
+  condition: and(contains(variables.BROWSER, 'Firefox'), contains(variables.imageName, 'ubuntu-latest'))
 
 - task: UseDotNet@2
   displayName: 'Use .NET Core sdk 2.2.x'
