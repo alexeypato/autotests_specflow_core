@@ -50,6 +50,7 @@ variables:
 
 steps:
 - script: |
+      sudo apt update
       sudo apt install firefox
   displayName: 'Install Firefox on Linux'
   condition: and(contains(variables.BROWSER, 'Firefox'), contains(variables.imageName, 'ubuntu-latest'))
