@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
+using System.Linq;
 using System.Net;
 using System.Runtime.InteropServices;
 using ICSharpCode.SharpZipLib.GZip;
@@ -82,19 +83,24 @@ namespace WebDriverManager.Services.Impl
             }
         }
 
-        protected void UnZipTGZ(String gzArchiveName, String destination)
+        protected void UnZipTGZ(string gzArchiveName, string destination)
         {
-            Stream inStream = File.OpenRead(gzArchiveName);
-            Stream gzipStream = new GZipInputStream(inStream);
-            var destFolder = Path.GetDirectoryName(destination) + Path.DirectorySeparatorChar;
-            Console.WriteLine("destination: " + destination);
-            Console.WriteLine("destFolder: " + destFolder);
-            TarArchive tarArchive = TarArchive.CreateInputTarArchive(gzipStream);
-            tarArchive.ExtractContents(destFolder);
-            tarArchive.Close();
-
-            gzipStream.Close();
-            inStream.Close();
+            using (var inStream = File.OpenRead(gzArchiveName))
+            {
+                using (var gzipStream = new GZipInputStream(inStream))
+                {
+                    var destFolder = Path.GetDirectoryName(destination) + Path.DirectorySeparatorChar;
+                    Console.WriteLine("destination: " + destination);
+                    Console.WriteLine("destFolder: " + destFolder);
+                    using (var tarArchive = TarArchive.CreateInputTarArchive(gzipStream))
+                    {
+                        tarArchive.ExtractContents(destFolder);
+                    }
+                    var filePaths = Directory.GetFiles(destFolder, "*",
+                        SearchOption.AllDirectories).ToList();
+                    filePaths.ForEach(filePath => Console.WriteLine("File:" + filePath));
+                }
+            }
         }
 
         protected void RemoveZip(string path)
