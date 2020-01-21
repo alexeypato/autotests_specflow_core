@@ -30,7 +30,6 @@ namespace WebDriverManager
             var zipPath = FileHelper.GetZipDestination(url);
             binaryPath = _binaryService.SetupBinary(url, zipPath, binaryPath, binaryName);
             _variableService.SetupVariable(binaryPath);
-            Console.WriteLine("Binary variable: " + binaryPath);
         }
 
         public void SetUpDriver(IDriverConfig config, string version = "Latest",

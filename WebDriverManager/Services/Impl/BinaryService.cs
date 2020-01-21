@@ -84,8 +84,6 @@ namespace WebDriverManager.Services.Impl
                 using (var gzipStream = new GZipInputStream(inStream))
                 {
                     var destFolder = Path.GetDirectoryName(destination);
-                    Console.WriteLine("destination: " + destination);
-                    Console.WriteLine("destFolder: " + destFolder);
                     using (var tarArchive = TarArchive.CreateInputTarArchive(gzipStream))
                     {
                         tarArchive.ExtractContents(destFolder);
