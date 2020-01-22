@@ -17,13 +17,13 @@ strategy:
       imageName: "ubuntu-latest"
       BROWSER: "Firefox"
     MacOs Chrome:
-      imageName: "macos-10.14"
+      imageName: "macos-latest"
       BROWSER: "Chrome"
     MacOs Firefox:
-      imageName: "macos-10.14"
+      imageName: "macos-latest"
       BROWSER: "Firefox"
     MacOs Safari:
-      imageName: "macos-10.14"
+      imageName: "macos-latest"
       BROWSER: "Safari"
     Windows Chrome:
       imageName: "windows-latest"
@@ -58,7 +58,7 @@ steps:
 - script: |
       brew cask install firefox
   displayName: 'Install Firefox on Mac Os'
-  condition: and(contains(variables.BROWSER, 'Firefox'), contains(variables.imageName, 'macos-10.14'))
+  condition: and(contains(variables.BROWSER, 'Firefox'), contains(variables.imageName, 'macos-latest'))
 
 - task: UseDotNet@2
   displayName: 'Use .NET Core sdk 2.2.x'
@@ -66,7 +66,6 @@ steps:
     version: '2.2.x'
     packageType: runtime
 
-# restore Nuget packages/dependencies
 - task: DotNetCoreCLI@2
   displayName: Restore
   inputs:
@@ -88,14 +87,21 @@ steps:
     arguments: '--configuration $(buildConfiguration)'
 
 - task: CopyFiles@2
+  displayName: Copy Allure Results
   inputs:
-    SourceFolder: '$(System.DefaultWorkingDirectory)/ProjectTests/bin/Debug/netcoreapp2.2'
+    SourceFolder: '$(System.DefaultWorkingDirectory)/ProjectTests/bin/Debug/netcoreapp2.2/allure-results'
     Contents: '**'
-    TargetFolder: '$(build.artifactstagingdirectory)'
+    TargetFolder: '$(build.artifactstagingdirectory)/$(Agent.OS)_$(BROWSER)/allure-results'
   condition: succeededOrFailed()
 
-# publish the UI test project to the SeleliumTest subfolder in the Artifact Staging Directory
-# optionally, you can add more steps to publish your own website alongside your SeleniumTests in another task
+- task: CopyFiles@2
+  displayName: Copy Logs
+  inputs:
+    SourceFolder: '$(System.DefaultWorkingDirectory)/ProjectTests/bin/Debug/netcoreapp2.2/Logs'
+    Contents: '**'
+    TargetFolder: '$(build.artifactstagingdirectory)/$(Agent.OS)_$(BROWSER)/Logs'
+  condition: succeededOrFailed()
+
 - task: DotNetCoreCLI@2
   displayName: Publish
   inputs:
@@ -107,8 +113,6 @@ steps:
     modifyOutputPath: false
   condition: succeededOrFailed()
 
-# publish all artifacts in the Artifact Stagign Directory
-# this will place the UI Test artifacts in Azure DevOps for future use in the deployment pipeline
 - task: PublishBuildArtifacts@1
   displayName: 'Publish Artifact'
   inputs:
