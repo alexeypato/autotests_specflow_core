@@ -94,25 +94,6 @@ steps:
     TargetFolder: '$(build.artifactstagingdirectory)/$(Agent.OS)_$(BROWSER)/allure-results'
   condition: succeededOrFailed()
 
-- task: CopyFiles@2
-  displayName: Copy Logs
-  inputs:
-    SourceFolder: '$(System.DefaultWorkingDirectory)/ProjectTests/bin/Debug/netcoreapp2.2/Logs'
-    Contents: '**'
-    TargetFolder: '$(build.artifactstagingdirectory)/$(Agent.OS)_$(BROWSER)/Logs'
-  condition: succeededOrFailed()
-
-- task: DotNetCoreCLI@2
-  displayName: Publish
-  inputs:
-    command: publish
-    publishWebProjects: false
-    projects: '$(project)'
-    arguments: '--configuration $(buildConfiguration) -o $(build.artifactstagingdirectory)'
-    zipAfterPublish: false
-    modifyOutputPath: false
-  condition: succeededOrFailed()
-
 - task: PublishBuildArtifacts@1
   displayName: 'Publish Artifact'
   inputs:
