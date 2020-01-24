@@ -7,7 +7,6 @@ using System.Threading;
 using Framework.Common;
 using Framework.Enums;
 using Framework.Extensions;
-using log4net;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.Extensions;
@@ -18,7 +17,6 @@ namespace Framework.Base
     public class WebElement : IWebElement
     {
         private readonly IWebDriver _driver;
-        private static readonly ILog Logger = LogManager.GetLogger(typeof(WebElement));
 
         public readonly IWebElement Element;
 
@@ -58,7 +56,7 @@ namespace Framework.Base
             }
             catch (Exception exc)
             {
-                Logger.Error($"Accept All File Types exception: {exc.StackTrace}");
+                Console.WriteLine($"Accept All File Types exception: {exc.StackTrace}");
             }
         }
 
@@ -75,7 +73,7 @@ namespace Framework.Base
             }
             catch (Exception exc)
             {
-                Logger.Error($"Clear Element exception: {exc.StackTrace}");
+                Console.WriteLine($"Clear Element exception: {exc.StackTrace}");
             }
         }
 
@@ -87,7 +85,7 @@ namespace Framework.Base
             }
             catch (Exception exc)
             {
-                Logger.Error($"Click Element exception: {exc.StackTrace}");
+                Console.WriteLine($"Click Element exception: {exc.StackTrace}");
                 ClickByJs();
             }
         }
@@ -105,7 +103,7 @@ namespace Framework.Base
             }
             catch (Exception exc)
             {
-                Logger.Error($"Display Element exception: {exc.StackTrace}");
+                Console.WriteLine($"Display Element exception: {exc.StackTrace}");
             }
         }
 
@@ -137,7 +135,7 @@ namespace Framework.Base
             }
             catch (Exception exc)
             {
-                Logger.Error($"Get Attribute exception: {exc.StackTrace}");
+                Console.WriteLine($"Get Attribute exception: {exc.StackTrace}");
                 return Element.GetAttribute(attributeName);
             }
         }
@@ -172,7 +170,7 @@ namespace Framework.Base
             }
             catch (Exception exc)
             {
-                Logger.Error($"Scroll Into View exception: {exc.StackTrace}");
+                Console.WriteLine($"Scroll Into View exception: {exc.StackTrace}");
             }
         }
 
@@ -184,7 +182,7 @@ namespace Framework.Base
             }
             catch (Exception exc)
             {
-                Logger.Error($"Select by Text exception: {exc.StackTrace}");
+                Console.WriteLine($"Select by Text exception: {exc.StackTrace}");
             }
         }
 
@@ -227,7 +225,7 @@ namespace Framework.Base
             }
             catch (Exception exc)
             {
-                Logger.Error($"Send Keys Element exception: {exc.StackTrace}");
+                Console.WriteLine($"Send Keys Element exception: {exc.StackTrace}");
             }
         }
 
@@ -259,7 +257,7 @@ namespace Framework.Base
             }
             catch (Exception exc)
             {
-                Logger.Error($"Element Is Select exception: {exc.StackTrace}");
+                Console.WriteLine($"Element Is Select exception: {exc.StackTrace}");
                 return IsChecked();
             }
         }
@@ -283,7 +281,7 @@ namespace Framework.Base
             }
             catch (Exception exc)
             {
-                Logger.Error($"Send Keys With Delay exception: {exc.StackTrace}");
+                Console.WriteLine($"Send Keys With Delay exception: {exc.StackTrace}");
             }
         }
     }

@@ -5,7 +5,6 @@ using System.Linq;
 using Framework.Common;
 using Framework.Enums;
 using Framework.Extensions;
-using log4net;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.Extensions;
 using OpenQA.Selenium.Support.UI;
@@ -17,8 +16,6 @@ namespace Framework.Base
     {
         private const int DefaultTimeout = (int)TimeoutValue.High;
         private readonly IWebDriver _driver;
-
-        private static readonly ILog Logger = LogManager.GetLogger(typeof(PageBase));
 
         public PageBase(IWebDriver driver)
         {
@@ -37,7 +34,7 @@ namespace Framework.Base
 
         public WebElement GetElementClickable(By locator, int timeoutInSeconds = DefaultTimeout)
         {
-            IWebElement element = null;
+            IWebElement element;
             var wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(timeoutInSeconds));
             try
             {
@@ -45,7 +42,8 @@ namespace Framework.Base
             }
             catch (Exception exc)
             {
-                Logger.Error("\nException ---\n{0}" + exc.StackTrace);
+                Console.WriteLine($"Locator: '{locator}'. Exception ---\n{exc.StackTrace}");
+                throw new NoSuchElementException();
             }
             return new WebElement(_driver, element);
         }
@@ -53,14 +51,15 @@ namespace Framework.Base
         public WebElement GetElementExists(By locator, int timeoutInSeconds = DefaultTimeout)
         {
             var wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(timeoutInSeconds));
-            IWebElement element = null;
+            IWebElement element;
             try
             {
                 element = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(locator));
             }
             catch (Exception exc)
             {
-                Logger.Error("\nException ---\n{0}" + exc.StackTrace);
+                Console.WriteLine($"Locator: '{locator}'. Exception ---\n{exc.StackTrace}");
+                throw new NoSuchElementException();
             }
             return new WebElement(_driver, element);
         }
@@ -68,14 +67,15 @@ namespace Framework.Base
         public WebElement GetElementVisible(By locator, int timeoutInSeconds = DefaultTimeout)
         {
             var wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(timeoutInSeconds));
-            IWebElement element = null;
+            IWebElement element;
             try
             {
                 element = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(locator));
             }
             catch (Exception exc)
             {
-                Logger.Error("\nException ---\n{0}" + exc.StackTrace);
+                Console.WriteLine($"Locator: '{locator}'. Exception ---\n{exc.StackTrace}");
+                throw new NoSuchElementException();
             }
             return new WebElement(_driver, element);
         }
@@ -118,7 +118,7 @@ namespace Framework.Base
             }
 
             if (logBlockItems.Count > 0)
-                Logger.Error($"Item didn't found. XPath: {logBlockItems.Last()}");
+                Console.WriteLine($"Item didn't found. XPath: {logBlockItems.Last()}");
             return false;
         }
 
@@ -132,7 +132,7 @@ namespace Framework.Base
             }
             catch (Exception exc)
             {
-                Logger.Error($"Waiting for element {locator} to be invisible caused an exception: {exc.StackTrace}");
+                Console.WriteLine($"Waiting for element {locator} to be invisible caused an exception: {exc.StackTrace}");
             }
 
             return isInvisible;
@@ -180,7 +180,7 @@ namespace Framework.Base
             }
             catch (Exception exc)
             {
-                Logger.Error($"Scroll To Element exception: {exc.StackTrace}");
+                Console.WriteLine($"Scroll To Element exception: {exc.StackTrace}");
             }
         }
 

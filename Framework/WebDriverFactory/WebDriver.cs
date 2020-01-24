@@ -3,7 +3,6 @@ using System.IO;
 using Framework.Common;
 using Framework.Enums;
 using Framework.Extensions;
-using log4net;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Edge;
@@ -19,7 +18,6 @@ namespace Framework.WebDriverFactory
     {
         private static Config ConfigInstance => Config.Instance;
         private static string DownloadsDir => $"{ConfigReader.BaseDirectory}{Path.DirectorySeparatorChar}downloads";
-        private static readonly ILog Logger = LogManager.GetLogger(typeof(WebDriver));
 
         public static IWebDriver GetWebDriver(Browser browser)
         {
@@ -46,7 +44,7 @@ namespace Framework.WebDriverFactory
                     driver = new SafariDriver(GetSafariOptions());
                     break;
                 default:
-                    Logger.Error($"Browser '{browser.ToDescription()}' is not supported");
+                    Console.WriteLine($"Browser '{browser.ToDescription()}' is not supported");
                     throw new ArgumentOutOfRangeException($"Browser '{browser.ToDescription()}' is not supported");
             }
 

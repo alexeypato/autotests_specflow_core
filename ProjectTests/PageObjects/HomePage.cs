@@ -1,16 +1,13 @@
 ﻿using Framework.Base;
-using Framework.Common;
 using Framework.Enums;
 using Framework.Extensions;
-using log4net;
 using OpenQA.Selenium;
 
 namespace ProjectTests.PageObjects
 {
     public class HomePage : PageBase
     {
-        private static readonly ILog Logger = LogManager.GetLogger(typeof(HomePage));
-        private Lang Lang => GetElementExists(By.XPath("/html[@itemscope]")).GetAttribute("lang")
+        private Lang Lang => GetElementExists(By.TagName("html")).GetAttribute("lang")
             .GetEnumValueByDescription<Lang>();
 
         public WebElement MainImage => GetElementVisible(By.XPath("//img[@alt='Google']"));
@@ -25,7 +22,6 @@ namespace ProjectTests.PageObjects
 
         public string GetSearchExpectedTitle()
         {
-            Logger.Info($"Browser is '{ConfigReader.BrowserType.ToDescription()}'");
             switch (Lang)
             {
                 case Lang.Be:
