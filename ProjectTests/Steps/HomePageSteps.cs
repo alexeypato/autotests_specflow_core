@@ -31,8 +31,8 @@ namespace ProjectTests.Steps
         [Then(@"Text in the search button is (displayed|hidden) according to the current language on Home page")]
         public void ThenTextInTheSearchButtonIsDisplayedAccordingToTheCurrentLanguageOnHomePage(bool isExpectedToBeVisible)
         {
-            var expectedText = _homePage.GetSearchButtonTitle();
-            var actualText = _homePage.SearchButton.GetAttribute("value");
+            var expectedText = _homePage.GetSearchExpectedTitle();
+            var actualText = _homePage.GetSearchTitle();
             Assert.AreEqual(isExpectedToBeVisible, expectedText.Equals(actualText),
                 $"'{expectedText}' expected text, '{actualText}' actual text in the search button on Home page");
         }

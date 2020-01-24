@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Framework", "Framework\Fram
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjectTests", "ProjectTests\ProjectTests.csproj", "{29D315B4-0DDF-45E2-B7B6-BFD7C4E0231E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebDriverManager", "WebDriverManager\WebDriverManager.csproj", "{178DBC5F-21DA-409A-8D39-1FB9B82AF4C4}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,10 +21,6 @@ Global
 		{29D315B4-0DDF-45E2-B7B6-BFD7C4E0231E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{29D315B4-0DDF-45E2-B7B6-BFD7C4E0231E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{29D315B4-0DDF-45E2-B7B6-BFD7C4E0231E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{178DBC5F-21DA-409A-8D39-1FB9B82AF4C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{178DBC5F-21DA-409A-8D39-1FB9B82AF4C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{178DBC5F-21DA-409A-8D39-1FB9B82AF4C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{178DBC5F-21DA-409A-8D39-1FB9B82AF4C4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -15,12 +15,15 @@ namespace ProjectTests.PageObjects
 
         public WebElement MainImage => GetElementVisible(By.XPath("//img[@alt='Google']"));
 
-        public WebElement SearchButton =>
-            GetElementClickable(By.XPath("//div[not(@jsname)]/center/input[@name='btnK']"));
-
         public HomePage(IWebDriver driver) : base(driver) { }
 
-        public string GetSearchButtonTitle()
+        public string GetSearchTitle()
+        {
+            return GetElementClickable(By.XPath("//div[not(@jsname)]/center/input[@name='btnK']"))
+                .GetAttribute("value");
+        }
+
+        public string GetSearchExpectedTitle()
         {
             Logger.Info($"Browser is '{ConfigReader.BrowserType.ToDescription()}'");
             switch (Lang)
