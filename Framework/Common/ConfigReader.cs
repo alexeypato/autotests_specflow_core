@@ -13,7 +13,7 @@ namespace Framework.Common
         public static readonly string BaseDirectory = AppContext.BaseDirectory.Substring(0, AppContext.BaseDirectory.IndexOf("bin", StringComparison.Ordinal));
 
         public static readonly Browser BrowserType = Environment.GetEnvironmentVariable("BROWSER")?.GetEnumValueByDescription<Browser>()
-                                                     ?? Browser.IE;
+                                                     ?? Browser.Chrome;
 
         public static void SetConfig()
         {

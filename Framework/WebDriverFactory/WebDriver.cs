@@ -53,16 +53,14 @@ namespace Framework.WebDriverFactory
 
         private static ChromeOptions GetChromeOptions()
         {
-            var chromeOptions = new ChromeOptions();
-            chromeOptions.AddArgument("--headless");
-            chromeOptions.AddArgument("--no-sandbox");
-            chromeOptions.AddArgument("--disable-dev-shm-usage");
-            chromeOptions.AddUserProfilePreference("intl.accept_languages", ConfigInstance.Language);
-            chromeOptions.AddUserProfilePreference("disable-popup-blocking", "true");
-            chromeOptions.AddUserProfilePreference("download.prompt_for_download", "false");
-            chromeOptions.AddUserProfilePreference("download.default_directory", DownloadsDir);
+            var options = new ChromeOptions();
+            options.AddArguments("--headless", "--no-sandbox", "--disable-gpu", "--disable-dev-shm-usage");
+            options.AddUserProfilePreference("intl.accept_languages", ConfigInstance.Language);
+            options.AddUserProfilePreference("disable-popup-blocking", "true");
+            options.AddUserProfilePreference("download.prompt_for_download", "false");
+            options.AddUserProfilePreference("download.default_directory", DownloadsDir);
 
-            return chromeOptions;
+            return options;
         }
 
         private static FirefoxOptions GetFirefoxOptions()
@@ -86,32 +84,32 @@ namespace Framework.WebDriverFactory
             firefoxProfile.SetPreference("dom.successive_dialog_time_limit", 0);
             firefoxProfile.SetPreference("intl.accept_languages", ConfigInstance.Language);
 
-            var firefoxOptions = new FirefoxOptions { Profile = firefoxProfile };
-            firefoxOptions.SetLoggingPreference(LogType.Driver, LogLevel.Off);
-            firefoxOptions.SetLoggingPreference(LogType.Browser, LogLevel.Off);
-            firefoxOptions.SetLoggingPreference(LogType.Client, LogLevel.Off);
-            firefoxOptions.SetLoggingPreference(LogType.Profiler, LogLevel.Off);
-            firefoxOptions.SetLoggingPreference(LogType.Server, LogLevel.Off);
-            firefoxOptions.LogLevel = FirefoxDriverLogLevel.Default;
-            firefoxOptions.AddArgument("-headless");
+            var options = new FirefoxOptions { Profile = firefoxProfile };
+            options.SetLoggingPreference(LogType.Driver, LogLevel.Off);
+            options.SetLoggingPreference(LogType.Browser, LogLevel.Off);
+            options.SetLoggingPreference(LogType.Client, LogLevel.Off);
+            options.SetLoggingPreference(LogType.Profiler, LogLevel.Off);
+            options.SetLoggingPreference(LogType.Server, LogLevel.Off);
+            options.LogLevel = FirefoxDriverLogLevel.Default;
+            options.AddArgument("-headless");
 
-            return firefoxOptions;
+            return options;
         }
 
         private static EdgeOptions GetEdgeOptions()
         {
-            var edgeOptions = new EdgeOptions()
+            var options = new EdgeOptions()
             {
                 PageLoadStrategy = PageLoadStrategy.Eager,
                 UseInPrivateBrowsing = true,
             };
 
-            return edgeOptions;
+            return options;
         }
 
         private static InternetExplorerOptions GetInternetExplorerOptions()
         {
-            var internetExplorerOptions = new InternetExplorerOptions
+            var options = new InternetExplorerOptions
             {
                 BrowserCommandLineArguments = "-private",
                 ElementScrollBehavior = InternetExplorerElementScrollBehavior.Bottom,
@@ -123,7 +121,7 @@ namespace Framework.WebDriverFactory
                 RequireWindowFocus = true
             };
 
-            return internetExplorerOptions;
+            return options;
         }
 
         private static SafariOptions GetSafariOptions()

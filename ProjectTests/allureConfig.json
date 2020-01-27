@@ -5,9 +5,9 @@
     "enableParameters": true,
     "allowLocalHistoryTrend": false,
     "links": [
-      "https://www.google.com/search?q={issue}",
-      "https://www.google.com/search?q={link}",
-      "https://www.google.com/search?q={tms}"
+      "https://github.com/alexeypato/={issue}",
+      "https://github.com/alexeypato/={link}",
+      "https://github.com/alexeypato/={tms}"
     ]
   },
 

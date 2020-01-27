@@ -32,6 +32,16 @@ namespace Framework.Base
             return _driver.ExecuteJavaScript<T>(script, args);
         }
 
+        public string GetCurrentPageUrl()
+        {
+            return _driver.Url;
+        }
+
+        public string GetDocumentHtml()
+        {
+            return ExecuteScript("return document.documentElement.outerHTML");
+        }
+
         public WebElement GetElementClickable(By locator, int timeoutInSeconds = DefaultTimeout)
         {
             IWebElement element;
@@ -140,7 +150,7 @@ namespace Framework.Base
 
         public bool IsElementPresent(By locator)
         {
-            return _driver.FindElements(locator).Count > 0;
+            return GetElements(locator).Count > 0;
         }
 
         public bool IsElementVisible(By locator, bool isExpectedToBeVisible, int timeoutInSeconds = DefaultTimeout)

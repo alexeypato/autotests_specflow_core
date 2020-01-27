@@ -30,9 +30,6 @@
     <None Update="appsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="log4net.config.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
 
   <ItemGroup>
@@ -50,6 +47,54 @@
     <PackageReference Include="SpecFlow" Version="3.1.78" />
     <PackageReference Include="SpecFlow.NUnit" Version="3.1.78" />
     <PackageReference Include="SpecFlow.Tools.MsBuild.Generation" Version="3.1.78" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Resources\Google\HomePageRes.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>HomePageRes.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\Google\SignInPageRes.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>SignInPageRes.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Resources\Google\HomePageRes.BE.resx">
+      <LastGenOutput>SignUpPage.Designer.cs</LastGenOutput>
+      <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Google\HomePageRes.FR.resx">
+      <LastGenOutput>SignUpPage.Designer.cs</LastGenOutput>
+      <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Google\HomePageRes.RU.resx">
+      <LastGenOutput>SignUpPage.Designer.cs</LastGenOutput>
+      <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Google\HomePageRes.resx">
+      <LastGenOutput>HomePageRes.Designer.cs</LastGenOutput>
+      <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Google\HomePageRes.EN.resx">
+      <LastGenOutput>SignUpPage.Designer.cs</LastGenOutput>
+      <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Google\SignInPageRes.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>SignInPageRes.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Google\SignInPageRes.RU.resx">
+      <LastGenOutput>SignUpPage.Designer.cs</LastGenOutput>
+      <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Google\SignInPageRes.EN.resx">
+      <LastGenOutput>SignUpPage.Designer.cs</LastGenOutput>
+      <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
   </ItemGroup>
 
 </Project>

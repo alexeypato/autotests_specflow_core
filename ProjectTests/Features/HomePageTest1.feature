@@ -2,7 +2,7 @@
 	Verification of the home page
 
 	
-@link:alexeypato+github
+@link:autotests_specflow_core
 @UiTest
 Scenario: Verifying the Home page
 	Given I am navigated to Home page

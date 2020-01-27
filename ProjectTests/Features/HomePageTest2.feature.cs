@@ -75,15 +75,15 @@ namespace ProjectTests.Features
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Verifying text in search button on the Home page")]
-        [NUnit.Framework.CategoryAttribute("link:alexeypato+github")]
+        [NUnit.Framework.CategoryAttribute("link:autotests_specflow_core")]
         [NUnit.Framework.CategoryAttribute("UiTest")]
         public virtual void VerifyingTextInSearchButtonOnTheHomePage()
         {
             string[] tagsOfScenario = new string[] {
-                    "link:alexeypato+github",
+                    "link:autotests_specflow_core",
                     "UiTest"};
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Verifying text in search button on the Home page", null, new string[] {
-                        "link:alexeypato+github",
+                        "link:autotests_specflow_core",
                         "UiTest"});
 #line 7
 this.ScenarioInitialize(scenarioInfo);

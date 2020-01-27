@@ -2,7 +2,7 @@
 	Verification of the search button text
 
 	
-@link:alexeypato+github
+@link:autotests_specflow_core
 @UiTest
 Scenario: Verifying text in search button on the Home page
 	Given I am navigated to Home page
