@@ -54,7 +54,7 @@ namespace Framework.WebDriverFactory
         private static ChromeOptions GetChromeOptions()
         {
             var options = new ChromeOptions();
-            options.AddArguments("--headless", "--no-sandbox", "--disable-gpu", "--disable-dev-shm-usage");
+            options.AddArguments("--no-sandbox", "--disable-gpu", "--disable-dev-shm-usage");
             options.AddUserProfilePreference("intl.accept_languages", ConfigInstance.Language);
             options.AddUserProfilePreference("disable-popup-blocking", "true");
             options.AddUserProfilePreference("download.prompt_for_download", "false");
@@ -91,7 +91,7 @@ namespace Framework.WebDriverFactory
             options.SetLoggingPreference(LogType.Profiler, LogLevel.Off);
             options.SetLoggingPreference(LogType.Server, LogLevel.Off);
             options.LogLevel = FirefoxDriverLogLevel.Default;
-            options.AddArgument("-headless");
+            //options.AddArgument("-headless");
 
             return options;
         }
