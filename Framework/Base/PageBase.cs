@@ -96,6 +96,11 @@ namespace Framework.Base
             return _driver.FindElements(locator);
         }
 
+        public string GetPageLanguage()
+        {
+            return ExecuteScript("return document.documentElement.lang;");
+        }
+
         public void GoToUrl(string url)
         {
             _driver.Navigate().GoToUrl(url);
