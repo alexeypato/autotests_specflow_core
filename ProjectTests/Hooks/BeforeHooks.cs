@@ -37,6 +37,10 @@ namespace ProjectTests.Hooks
         {
             Console.WriteLine(
                 $@"Current UI culture is '{CultureInfo.CurrentUICulture.TwoLetterISOLanguageName.ToUpper()}'");
+            Console.WriteLine(
+                $@"Current culture is '{CultureInfo.CurrentCulture.TwoLetterISOLanguageName.ToUpper()}'");
+            Console.WriteLine(
+                $@"Installed UI culture is '{CultureInfo.InstalledUICulture.TwoLetterISOLanguageName.ToUpper()}'");
             Driver = WebDriver.GetWebDriver(BrowserType);
             Driver.Manage().Cookies.DeleteAllCookies();
             Driver.Manage().Window.Maximize();

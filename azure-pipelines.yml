@@ -12,9 +12,11 @@ strategy:
   matrix:
     Linux Chrome:
       imageName: "ubuntu-latest"
+      browserApp: "google-chrome-stable"
       BROWSER: "Chrome"
     Linux Firefox:
       imageName: "ubuntu-latest"
+      browserApp: "firefox"
       BROWSER: "Firefox"
     MacOs Chrome:
       imageName: "macos-latest"
@@ -28,15 +30,15 @@ strategy:
     Windows Chrome:
       imageName: "windows-latest"
       BROWSER: "Chrome"
-    Windows Edge:
-      imageName: "windows-latest"
-      BROWSER: "Edge"
+#    Windows Edge:
+#      imageName: "windows-latest"
+#      BROWSER: "Edge"
     Windows Firefox:
       imageName: "windows-latest"
       BROWSER: "Firefox"
-    Windows Internet Explorer:
-      imageName: "windows-latest"
-      BROWSER: "IE"
+#    Windows Internet Explorer:
+#      imageName: "windows-latest"
+#      BROWSER: "IE"
   maxParallel: 10
 
 pool:
@@ -51,9 +53,9 @@ variables:
 steps:
 - script: |
       sudo apt update
-      sudo apt install firefox
-  displayName: 'Install Firefox on Linux'
-  condition: and(contains(variables.BROWSER, 'Firefox'), contains(variables.imageName, 'ubuntu-latest'))
+      sudo apt install $(browserApp)
+  displayName: 'Install latest $(browserApp) on Linux'
+  condition: contains(variables.imageName, 'ubuntu-latest')
 
 - script: |
       brew cask install firefox
@@ -89,7 +91,7 @@ steps:
 - task: CopyFiles@2
   displayName: Copy Allure Results
   inputs:
-    SourceFolder: '$(System.DefaultWorkingDirectory)/ProjectTests/bin/Debug/netcoreapp2.2/allure-results'
+    SourceFolder: '$(System.DefaultWorkingDirectory)/ProjectTests/bin/Debug/netcoreapp3.1/allure-results'
     Contents: '**'
     TargetFolder: '$(build.artifactstagingdirectory)/$(Agent.OS)_$(BROWSER)/allure-results'
   condition: succeededOrFailed()
