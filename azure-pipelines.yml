@@ -10,14 +10,14 @@ trigger:
 
 strategy:
   matrix:
-    Linux Chrome:
-      imageName: "ubuntu-latest"
-      browserApp: "google-chrome-stable"
-      BROWSER: "Chrome"
-    Linux Firefox:
-      imageName: "ubuntu-latest"
-      browserApp: "firefox"
-      BROWSER: "Firefox"
+ #   Linux Chrome:
+ #     imageName: "ubuntu-latest"
+ #     browserApp: "google-chrome-stable"
+ #     BROWSER: "Chrome"
+ #   Linux Firefox:
+ #     imageName: "ubuntu-latest"
+ #     browserApp: "firefox"
+ #     BROWSER: "Firefox"
     MacOs Chrome:
       imageName: "macos-latest"
       BROWSER: "Chrome"

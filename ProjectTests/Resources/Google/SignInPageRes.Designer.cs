@@ -61,7 +61,7 @@ namespace ProjectTests.Resources.Google {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Create account.
         /// </summary>
         internal static string CreateAccount {
             get {
@@ -70,7 +70,7 @@ namespace ProjectTests.Resources.Google {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to For myself.
         /// </summary>
         internal static string ForMyself {
             get {

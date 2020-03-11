@@ -54,6 +54,7 @@ namespace Framework.WebDriverFactory
         private static ChromeOptions GetChromeOptions()
         {
             var options = new ChromeOptions();
+            //options.AddArgument("--headless");
             options.AddArguments("--no-sandbox", "--disable-gpu", "--disable-dev-shm-usage");
             options.AddUserProfilePreference("intl.accept_languages", ConfigInstance.Language);
             options.AddUserProfilePreference("disable-popup-blocking", "true");

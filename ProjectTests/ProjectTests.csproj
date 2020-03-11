@@ -63,10 +63,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Resources\Google\HomePageRes.IV.resx">
-      <LastGenOutput>SignUpPage.Designer.cs</LastGenOutput>
-      <Generator>ResXFileCodeGenerator</Generator>
-    </EmbeddedResource>
     <EmbeddedResource Update="Resources\Google\HomePageRes.BE.resx">
       <LastGenOutput>SignUpPage.Designer.cs</LastGenOutput>
       <Generator>ResXFileCodeGenerator</Generator>
@@ -83,23 +79,11 @@
       <LastGenOutput>HomePageRes.Designer.cs</LastGenOutput>
       <Generator>ResXFileCodeGenerator</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Resources\Google\HomePageRes.EN.resx">
-      <LastGenOutput>SignUpPage.Designer.cs</LastGenOutput>
-      <Generator>ResXFileCodeGenerator</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Resources\Google\SignInPageRes.IV.resx">
-      <LastGenOutput>SignUpPage.Designer.cs</LastGenOutput>
-      <Generator>ResXFileCodeGenerator</Generator>
-    </EmbeddedResource>
     <EmbeddedResource Update="Resources\Google\SignInPageRes.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>SignInPageRes.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\Google\SignInPageRes.RU.resx">
-      <LastGenOutput>SignUpPage.Designer.cs</LastGenOutput>
-      <Generator>ResXFileCodeGenerator</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Resources\Google\SignInPageRes.EN.resx">
       <LastGenOutput>SignUpPage.Designer.cs</LastGenOutput>
       <Generator>ResXFileCodeGenerator</Generator>
     </EmbeddedResource>

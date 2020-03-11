@@ -61,7 +61,7 @@ namespace ProjectTests.Resources.Google {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Google Search.
         /// </summary>
         internal static string GoogleSearch {
             get {
