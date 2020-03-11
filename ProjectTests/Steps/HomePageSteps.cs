@@ -38,7 +38,7 @@ namespace ProjectTests.Steps
             var pageLanguage = _homePage.GetPageLanguage();
             Console.WriteLine(
                 $@"Current Website Culture is '{pageLanguage}'");
-            Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo(pageLanguage);
+            Thread.CurrentThread.CurrentUICulture = CultureInfo.CreateSpecificCulture(pageLanguage);
             var expectedText = HomePageRes.GoogleSearch;
             var actualText = _homePage.GetSearchTitle();
             Assert.AreEqual(isExpectedToBeVisible, expectedText.Equals(actualText),
