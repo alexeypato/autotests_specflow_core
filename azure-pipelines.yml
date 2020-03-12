@@ -54,11 +54,11 @@ variables:
 
 steps:
 - script: |
+      sudo apt-add-repository ppa:qameta/allure
+      sudo apt-get update
       sudo apt update
-      sudo apt install default-jre -y
       sudo apt install $(browserApp)
-      wget -c https://repo.maven.apache.org/maven2/io/qameta/allure/allure-commandline/$(allureVersion)/allure-commandline-$(allureVersion).tgz -O - | tar -xz && chmod +x /opt/allure-$(allureVersion)/bin/allure
-      export PATH=$(PATH):/opt/allure-$(allureVersion)/bin
+      sudo apt-get install allure
       allure --version
   displayName: 'Install latest $(browserApp) and allure on Linux'
   condition: contains(variables.imageName, 'ubuntu-latest')
@@ -75,7 +75,6 @@ steps:
     script: |
       iwr -useb get.scoop.sh | iex
       scoop install allure
-      allure --version
   condition: contains(variables.imageName, 'windows-latest')
 
 - script: |
