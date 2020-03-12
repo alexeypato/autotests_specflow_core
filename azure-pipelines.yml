@@ -58,7 +58,7 @@ steps:
       sudo apt install default-jre -y
       sudo apt install $(browserApp)
       wget -c https://repo.maven.apache.org/maven2/io/qameta/allure/allure-commandline/$(allureVersion)/allure-commandline-$(allureVersion).tgz -O - | tar -xz && chmod +x /opt/allure-$(allureVersion)/bin/allure
-      export PATH=$PATH:/opt/allure-$(allureVersion)/bin
+      export PATH=$(PATH):/opt/allure-$(allureVersion)/bin
       allure --version
   displayName: 'Install latest $(browserApp) and allure on Linux'
   condition: contains(variables.imageName, 'ubuntu-latest')
@@ -113,7 +113,7 @@ steps:
       allure generate allure-results -o '$(build.artifactstagingdirectory)/$(Agent.OS)_$(BROWSER)/allure-report' -c
   displayName: 'Allure generate report'
   workingDirectory: '$(allureResults)'
-  condition: and(ne(variables.imageName, 'windows-latest'))
+  condition: ne(variables.imageName, 'windows-latest')
 
 - task: PowerShell@2
   displayName: 'Allure generate report'
@@ -122,7 +122,7 @@ steps:
     workingDirectory: '$(allureResults)'
     script: |
       allure generate allure-results -o '$(build.artifactstagingdirectory)/$(Agent.OS)_$(BROWSER)/allure-report' -c
-  condition: and(contains(variables.imageName, 'windows-latest'))
+  condition: contains(variables.imageName, 'windows-latest')
 
 - task: CopyFiles@2
   displayName: Copy Allure Results
