@@ -57,8 +57,8 @@ steps:
       sudo apt update
       sudo apt install default-jre -y
       sudo apt install $(browserApp)
-      wget -c https://repo.maven.apache.org/maven2/io/qameta/allure/allure-commandline/$ALLURE_VERSION/allure-commandline-$ALLURE_VERSION.tgz -O - | tar -xz && chmod +x /opt/allure-$ALLURE_VERSION/bin/allure
-      export PATH=$PATH:/opt/allure-$ALLURE_VERSION/bin
+      wget -c https://repo.maven.apache.org/maven2/io/qameta/allure/allure-commandline/$(allureVersion)/allure-commandline-$(allureVersion).tgz -O - | tar -xz && chmod +x /opt/allure-$(allureVersion)/bin/allure
+      export PATH=$PATH:/opt/allure-$(allureVersion)/bin
       allure --version
   displayName: 'Install latest $(browserApp) and allure on Linux'
   condition: contains(variables.imageName, 'ubuntu-latest')
@@ -113,7 +113,18 @@ steps:
       allure generate allure-results -o '$(build.artifactstagingdirectory)/$(Agent.OS)_$(BROWSER)/allure-report' -c
   displayName: 'Allure generate report'
   workingDirectory: '$(allureResults)'
-  condition: succeededOrFailed()
+  condition: and(ne(variables.imageName, 'windows-latest'), succeededOrFailed())
+
+- task: PowerShell@2
+  displayName: 'Allure generate report'
+  inputs:
+    targetType: 'inline'
+    workingDirectory: '$(allureResults)'
+    script: |
+      iwr -useb get.scoop.sh | iex
+      scoop install allure
+      allure --version
+  condition: and(contains(variables.imageName, 'windows-latest'), succeededOrFailed())
 
 - task: CopyFiles@2
   displayName: Copy Allure Results
