@@ -110,7 +110,8 @@ steps:
   displayName: 'Allure generate report on Windows'
   inputs:
     script: |
-      $(USERNAME)\scoop\apps\allure\$(allureVersion)\bin\allure generate allure-results -o ''$(build.artifactstagingdirectory)\$(Agent.OS)_$(BROWSER)\allure-report'' -c
+      ls C:\Users\
+      %systemdrive%%homepath%\scoop\apps\allure\$(allureVersion)\bin\allure generate allure-results -o '$(build.artifactstagingdirectory)\$(Agent.OS)_$(BROWSER)\allure-report' -c
     workingDirectory: '$(allureResults)'
   condition: contains(variables.imageName, 'windows-latest')
 
