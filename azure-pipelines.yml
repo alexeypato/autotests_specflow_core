@@ -49,13 +49,34 @@ variables:
   project: '**/*Tests/*.csproj'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Debug'
+  allureResults: '$(System.DefaultWorkingDirectory)/ProjectTests/bin/Debug/netcoreapp3.1/'
 
 steps:
 - script: |
+      sudo apt-add-repository ppa:qameta/allure
       sudo apt update
       sudo apt install $(browserApp)
-  displayName: 'Install latest $(browserApp) on Linux'
+      sudo apt-get install allure
+  displayName: 'Install latest $(browserApp) and allure on Linux'
   condition: contains(variables.imageName, 'ubuntu-latest')
+
+- script: |
+      brew install allure
+  displayName: 'Install allure on Mac Os'
+  condition: contains(variables.imageName, 'macos-latest')
+
+- task: PowerShell@2
+  inputs:
+    targetType: 'inline'
+    script: |
+      Set-ExecutionPolicy RemoteSigned -scope CurrentUser
+      iwr -useb get.scoop.sh | iex
+  condition: contains(variables.imageName, 'windows-latest')
+
+- script: |
+      scoop install allure
+  displayName: 'Install allure on Windows'
+  condition: contains(variables.imageName, 'windows-latest')
 
 - script: |
       brew cask install firefox
@@ -88,10 +109,15 @@ steps:
     projects: '$(project)'
     arguments: '--configuration $(buildConfiguration)'
 
+- script: |
+      allure generate allure-results -o '$(build.artifactstagingdirectory)/$(Agent.OS)_$(BROWSER)/allure-report' -c
+  displayName: 'Allure generate report'
+  workingDirectory: '$(allureResults)'
+
 - task: CopyFiles@2
   displayName: Copy Allure Results
   inputs:
-    SourceFolder: '$(System.DefaultWorkingDirectory)/ProjectTests/bin/Debug/netcoreapp3.1/allure-results'
+    SourceFolder: '$(allureResults)allure-results'
     Contents: '**'
     TargetFolder: '$(build.artifactstagingdirectory)/$(Agent.OS)_$(BROWSER)/allure-results'
   condition: succeededOrFailed()
