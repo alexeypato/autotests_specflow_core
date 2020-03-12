@@ -58,7 +58,6 @@ steps:
       sudo apt install $(browserApp)
       cd /opt
       wget -c https://repo.maven.apache.org/maven2/io/qameta/allure/allure-commandline/$(allureVersion)/allure-commandline-$(allureVersion).tgz -O - | tar -xz && chmod +x /opt/allure-$(allureVersion)/bin/allure
-      export PATH=$PATH:/opt/allure-$(allureVersion)/bin
   displayName: 'Install latest $(browserApp) and allure on Linux'
   condition: contains(variables.imageName, 'ubuntu-latest')
 
@@ -108,14 +107,21 @@ steps:
     arguments: '--configuration $(buildConfiguration)'
 
 - task: CmdLine@2
-  displayName: 'Allure generate report'
+  displayName: 'Allure generate report on Windows'
+  inputs:
+    script: 'C:/Users/%USERNAME%/scoop/apps/allure/$(allureVersion)/bin/allure generate allure-results -o ''$(build.artifactstagingdirectory)/$(Agent.OS)_$(BROWSER)/allure-report'' -c'
+    workingDirectory: '$(allureResults)'
+  condition: contains(variables.imageName, 'windows-latest')
+
+- task: CmdLine@2
+  displayName: 'Allure generate report on Linux'
   inputs:
     script: '/opt/allure-$(allureVersion)/bin/allure generate allure-results -o ''$(build.artifactstagingdirectory)/$(Agent.OS)_$(BROWSER)/allure-report'' -c'
     workingDirectory: '$(allureResults)'
   condition: contains(variables.imageName, 'ubuntu-latest')
 
 - task: CmdLine@2
-  displayName: 'Allure generate report'
+  displayName: 'Allure generate report on Mac Os'
   inputs:
     script: 'allure generate allure-results -o ''$(build.artifactstagingdirectory)/$(Agent.OS)_$(BROWSER)/allure-report'' -c'
     workingDirectory: '$(allureResults)'
