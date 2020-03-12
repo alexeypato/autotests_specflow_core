@@ -55,6 +55,7 @@ steps:
 - script: |
       sudo apt-add-repository ppa:qameta/allure
       sudo apt update
+      sudo apt install default-jre -y
       sudo apt install $(browserApp)
       sudo apt-get install allure
   displayName: 'Install latest $(browserApp) and allure on Linux'
@@ -66,15 +67,12 @@ steps:
   condition: contains(variables.imageName, 'macos-latest')
 
 - task: PowerShell@2
+  displayName: 'Install allure on Windows'
   inputs:
     targetType: 'inline'
     script: |
       iwr -useb get.scoop.sh | iex
-  condition: contains(variables.imageName, 'windows-latest')
-
-- script: |
       scoop install allure
-  displayName: 'Install allure on Windows'
   condition: contains(variables.imageName, 'windows-latest')
 
 - script: |
