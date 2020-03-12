@@ -113,7 +113,7 @@ steps:
       allure generate allure-results -o '$(build.artifactstagingdirectory)/$(Agent.OS)_$(BROWSER)/allure-report' -c
   displayName: 'Allure generate report'
   workingDirectory: '$(allureResults)'
-  condition: and(ne(variables.imageName, 'windows-latest'), succeededOrFailed())
+  condition: and(ne(variables.imageName, 'windows-latest'))
 
 - task: PowerShell@2
   displayName: 'Allure generate report'
@@ -121,10 +121,8 @@ steps:
     targetType: 'inline'
     workingDirectory: '$(allureResults)'
     script: |
-      iwr -useb get.scoop.sh | iex
-      scoop install allure
-      allure --version
-  condition: and(contains(variables.imageName, 'windows-latest'), succeededOrFailed())
+      allure generate allure-results -o '$(build.artifactstagingdirectory)/$(Agent.OS)_$(BROWSER)/allure-report' -c
+  condition: and(contains(variables.imageName, 'windows-latest'))
 
 - task: CopyFiles@2
   displayName: Copy Allure Results
