@@ -110,9 +110,16 @@ steps:
 - task: CmdLine@2
   displayName: 'Allure generate report'
   inputs:
+    script: '/opt/allure-$(allureVersion)/bin/allure generate allure-results -o ''$(build.artifactstagingdirectory)/$(Agent.OS)_$(BROWSER)/allure-report'' -c'
+    workingDirectory: '$(allureResults)'
+  condition: contains(variables.imageName, 'ubuntu-latest')
+
+- task: CmdLine@2
+  displayName: 'Allure generate report'
+  inputs:
     script: 'allure generate allure-results -o ''$(build.artifactstagingdirectory)/$(Agent.OS)_$(BROWSER)/allure-report'' -c'
     workingDirectory: '$(allureResults)'
-  condition: succeededOrFailed()
+  condition: contains(variables.imageName, 'macos-latest')
 
 - task: CopyFiles@2
   displayName: Copy Allure Results
