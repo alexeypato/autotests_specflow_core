@@ -111,30 +111,32 @@ steps:
   inputs:
     script: |
       ls C:\Users\
-      %systemdrive%%homepath%\scoop\apps\allure\$(allureVersion)\bin\allure generate allure-results -o '$(build.artifactstagingdirectory)\$(Agent.OS)_$(BROWSER)\allure-report' -c
+      %systemdrive%%homepath%\scoop\apps\allure\$(allureVersion)\bin\allure generate allure-results -o allure-report -c
     workingDirectory: '$(allureResults)'
   condition: contains(variables.imageName, 'windows-latest')
 
 - task: CmdLine@2
   displayName: 'Allure generate report on Linux'
   inputs:
-    script: '/opt/allure-$(allureVersion)/bin/allure generate allure-results -o ''$(build.artifactstagingdirectory)/$(Agent.OS)_$(BROWSER)/allure-report'' -c'
+    script: |
+      /opt/allure-$(allureVersion)/bin/allure generate allure-results -o allure-report -c
     workingDirectory: '$(allureResults)'
   condition: contains(variables.imageName, 'ubuntu-latest')
 
 - task: CmdLine@2
   displayName: 'Allure generate report on Mac Os'
   inputs:
-    script: 'allure generate allure-results -o ''$(build.artifactstagingdirectory)/$(Agent.OS)_$(BROWSER)/allure-report'' -c'
+    script: |
+      allure generate allure-results -o allure-report -c
     workingDirectory: '$(allureResults)'
   condition: contains(variables.imageName, 'macos-latest')
 
 - task: CopyFiles@2
   displayName: Copy Allure Results
   inputs:
-    SourceFolder: '$(allureResults)allure-results'
+    SourceFolder: '$(allureResults)allure-report'
     Contents: '**'
-    TargetFolder: '$(build.artifactstagingdirectory)/$(Agent.OS)_$(BROWSER)/allure-results'
+    TargetFolder: '$(build.artifactstagingdirectory)/$(Agent.OS)_$(BROWSER)/allure-report'
   condition: succeededOrFailed()
 
 - task: PublishBuildArtifacts@1
