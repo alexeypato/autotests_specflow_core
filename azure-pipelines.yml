@@ -50,14 +50,16 @@ variables:
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Debug'
   allureResults: '$(System.DefaultWorkingDirectory)/ProjectTests/bin/Debug/netcoreapp3.1/'
+  allureVersion: '2.13.2'
 
 steps:
 - script: |
-      sudo apt-add-repository ppa:qameta/allure
       sudo apt update
       sudo apt install default-jre -y
       sudo apt install $(browserApp)
-      sudo apt-get install allure
+      wget -c https://repo.maven.apache.org/maven2/io/qameta/allure/allure-commandline/$ALLURE_VERSION/allure-commandline-$ALLURE_VERSION.tgz -O - | tar -xz && chmod +x /opt/allure-$ALLURE_VERSION/bin/allure
+      export PATH=$PATH:/opt/allure-$ALLURE_VERSION/bin
+      allure --version
   displayName: 'Install latest $(browserApp) and allure on Linux'
   condition: contains(variables.imageName, 'ubuntu-latest')
 
@@ -73,6 +75,7 @@ steps:
     script: |
       iwr -useb get.scoop.sh | iex
       scoop install allure
+      allure --version
   condition: contains(variables.imageName, 'windows-latest')
 
 - script: |
