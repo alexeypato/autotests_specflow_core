@@ -55,11 +55,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>HomePageRes.resx</DependentUpon>
     </Compile>
-    <Compile Update="Resources\Google\SignInPageRes.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>SignInPageRes.resx</DependentUpon>
-    </Compile>
   </ItemGroup>
 
   <ItemGroup>
@@ -81,18 +76,6 @@
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\Google\HomePageRes.resx">
       <LastGenOutput>HomePageRes.Designer.cs</LastGenOutput>
-      <Generator>ResXFileCodeGenerator</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Resources\Google\SignInPageRes.NL.resx">
-      <LastGenOutput>SignUpPage.Designer.cs</LastGenOutput>
-      <Generator>ResXFileCodeGenerator</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Resources\Google\SignInPageRes.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>SignInPageRes.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Resources\Google\SignInPageRes.RU.resx">
-      <LastGenOutput>SignUpPage.Designer.cs</LastGenOutput>
       <Generator>ResXFileCodeGenerator</Generator>
     </EmbeddedResource>
   </ItemGroup>

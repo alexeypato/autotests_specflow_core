@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Globalization;
-using System.Threading;
 using Framework.Base;
 using Framework.Common;
 using NUnit.Framework;
@@ -38,7 +37,7 @@ namespace ProjectTests.Steps
             var pageLanguage = _homePage.GetPageLanguage();
             Console.WriteLine(
                 $@"Current Website Culture is '{pageLanguage}'");
-            Thread.CurrentThread.CurrentUICulture = CultureInfo.CreateSpecificCulture(pageLanguage);
+            CultureInfo.DefaultThreadCurrentCulture = CultureInfo.CreateSpecificCulture(pageLanguage);
             var expectedText = HomePageRes.GoogleSearch;
             var actualText = _homePage.GetSearchTitle();
             Assert.AreEqual(isExpectedToBeVisible, expectedText.Equals(actualText),

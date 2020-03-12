@@ -110,7 +110,6 @@ steps:
   displayName: 'Allure generate report on Windows'
   inputs:
     script: |
-      ls C:\Users\
       %systemdrive%%homepath%\scoop\apps\allure\$(allureVersion)\bin\allure generate allure-results -o allure-report -c
     workingDirectory: '$(allureResults)'
   condition: contains(variables.imageName, 'windows-latest')
@@ -132,7 +131,7 @@ steps:
   condition: contains(variables.imageName, 'macos-latest')
 
 - task: CopyFiles@2
-  displayName: Copy Allure Results
+  displayName: Copy Allure Report
   inputs:
     SourceFolder: '$(allureResults)allure-report'
     Contents: '**'
