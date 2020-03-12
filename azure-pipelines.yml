@@ -69,7 +69,6 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
-      Set-ExecutionPolicy RemoteSigned -scope CurrentUser
       iwr -useb get.scoop.sh | iex
   condition: contains(variables.imageName, 'windows-latest')
 
@@ -113,6 +112,7 @@ steps:
       allure generate allure-results -o '$(build.artifactstagingdirectory)/$(Agent.OS)_$(BROWSER)/allure-report' -c
   displayName: 'Allure generate report'
   workingDirectory: '$(allureResults)'
+  condition: succeededOrFailed()
 
 - task: CopyFiles@2
   displayName: Copy Allure Results
