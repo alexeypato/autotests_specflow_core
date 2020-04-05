@@ -12,6 +12,8 @@ namespace Framework.Enums
         EnIe,
         [Description("fr")]
         Fr,
+        [Description("nl")]
+        Nl,
         [Description("ru-BY")]
         RuBy,
     }
