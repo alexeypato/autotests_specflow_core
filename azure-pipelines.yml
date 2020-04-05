@@ -81,9 +81,9 @@ steps:
   condition: and(contains(variables.BROWSER, 'Firefox'), contains(variables.imageName, 'macos-latest'))
 
 - task: UseDotNet@2
-  displayName: 'Use .NET Core sdk 3.1.x'
+  displayName: 'Use .NET Core sdk 3.1.102'
   inputs:
-    version: '3.1.x'
+    version: '3.1.102'
     packageType: sdk
 
 - task: DotNetCoreCLI@2

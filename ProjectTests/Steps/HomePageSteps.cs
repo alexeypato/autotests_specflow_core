@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Globalization;
 using Framework.Base;
 using Framework.Common;
 using NUnit.Framework;
 using ProjectTests.PageObjects;
-using ProjectTests.Resources.Google;
 using TechTalk.SpecFlow;
 
 namespace ProjectTests.Steps
@@ -37,8 +35,7 @@ namespace ProjectTests.Steps
             var pageLanguage = _homePage.GetPageLanguage();
             Console.WriteLine(
                 $@"Current Website Culture is '{pageLanguage}'");
-            CultureInfo.DefaultThreadCurrentCulture = CultureInfo.CreateSpecificCulture(pageLanguage);
-            var expectedText = HomePageRes.GoogleSearch;
+            var expectedText = _homePage.GetSearchExpectedTitle();
             var actualText = _homePage.GetSearchTitle();
             Assert.AreEqual(isExpectedToBeVisible, expectedText.Equals(actualText),
                 $"'{expectedText}' expected text, '{actualText}' actual text in the search button on Home page");

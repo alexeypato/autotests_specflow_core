@@ -10,7 +10,7 @@ namespace ProjectTests.PageObjects
         private Lang Lang => GetElementExists(By.TagName("html")).GetAttribute("lang")
             .GetEnumValueByDescription<Lang>();
 
-        public WebElement MainImage => GetElementVisible(By.XPath("//img[@alt='Google']"));
+        public WebElement MainImage => GetElementVisible(By.XPath("//div[@id='hplogo']"));
 
         public HomePage(IWebDriver driver) : base(driver) { }
 

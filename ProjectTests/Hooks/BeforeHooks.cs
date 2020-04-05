@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Threading;
 using Allure.Commons;
 using Framework.Common;
 using Framework.Extensions;
