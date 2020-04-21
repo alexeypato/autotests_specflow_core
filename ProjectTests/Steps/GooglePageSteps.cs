@@ -29,6 +29,12 @@ namespace ProjectTests.Steps
             googlePage.SetSearchField(value);
         }
 
+        [When(@"I press Search")]
+        public void WhenIPressSearch()
+        {
+            googlePage.PressSearch();
+        }
+
         [Then(@"I expect that search element is (displayed|hidden)")]
         public void ThenIExpectThatSearchElementBecomesNotDisplayed(bool falseCase)
         {

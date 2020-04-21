@@ -9,6 +9,8 @@ namespace ProjectTests.PageObjects
     {
         private Lang Lang => GetElementExists(By.TagName("html")).GetAttribute("lang")
             .GetEnumValueByDescription<Lang>();
+        private WebElement SearchButton =>
+            GetElementClickable(By.XPath("//div[not(@jsname)]/center/input[@name='btnK']"));
 
         public WebElement MainImage => GetElementVisible(By.XPath("//div[@id='hplogo']"));
 
@@ -16,8 +18,7 @@ namespace ProjectTests.PageObjects
 
         public string GetSearchTitle()
         {
-            return GetElementClickable(By.XPath("//div[not(@jsname)]/center/input[@name='btnK']"))
-                .GetAttribute("value");
+            return SearchButton.GetAttribute("value");
         }
 
         public string GetSearchExpectedTitle()
@@ -37,9 +38,15 @@ namespace ProjectTests.PageObjects
             return IsElementVisible(By.XPath("//*[@id='search']//div"), falseCase);
         }
 
+        public void PressSearch()
+        {
+            SearchButton.Click();
+        }
+
         public void SetSearchField(string value)
         {
-            GetElementClickable(By.CssSelector("[name=q]")).Set(value);
+            var element = GetElementClickable(By.CssSelector("[name=q]"));
+            element.Set(value);
         }
     }
 }

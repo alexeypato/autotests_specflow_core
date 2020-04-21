@@ -119,7 +119,7 @@ this.FeatureBackground();
     testRunner.When("I set \'waw4f34f34erv3434we4aw4w4wa4aw4g44\' to the search field", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 13
-        testRunner.And("I press \'Enter\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+        testRunner.And("I press Search", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 14
     testRunner.Then("I expect that search element is hidden", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
@@ -129,11 +129,11 @@ this.FeatureBackground();
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Searching for term \"<searchItem>\"")]
+        [NUnit.Framework.DescriptionAttribute("Searching for known term")]
         [NUnit.Framework.CategoryAttribute("UiTest")]
         [NUnit.Framework.TestCaseAttribute("Selenium Webdriver", null)]
         [NUnit.Framework.TestCaseAttribute("Docker", null)]
-        public virtual void SearchingForTermSearchItem(string searchItem, string[] exampleTags)
+        public virtual void SearchingForKnownTerm(string searchItem, string[] exampleTags)
         {
             string[] @__tags = new string[] {
                     "UiTest"};
@@ -142,7 +142,7 @@ this.FeatureBackground();
                 @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
             }
             string[] tagsOfScenario = @__tags;
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Searching for term \"<searchItem>\"", null, @__tags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Searching for known term", null, @__tags);
 #line 17
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -170,7 +170,7 @@ this.FeatureBackground();
     testRunner.When(string.Format("I set \'{0}\' to the search field", searchItem), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 19
-        testRunner.And("I press \'Enter\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+        testRunner.And("I press Search", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 20
     testRunner.Then("I expect that search element is displayed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
