@@ -5,6 +5,8 @@ namespace Framework.Extensions
 {
     public enum ContextKey
     {
+        GeneratedEmail,
+        PreviousEmail,
         WebDriver,
         WindowHandles
     }

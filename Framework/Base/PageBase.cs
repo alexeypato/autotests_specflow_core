@@ -6,6 +6,7 @@ using Framework.Common;
 using Framework.Enums;
 using Framework.Extensions;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.Extensions;
 using OpenQA.Selenium.Support.UI;
 using TechTalk.SpecFlow;
@@ -15,26 +16,26 @@ namespace Framework.Base
     public class PageBase
     {
         private const int DefaultTimeout = (int)TimeoutValue.High;
-        private readonly IWebDriver _driver;
+        private readonly IWebDriver driver;
 
         public PageBase(IWebDriver driver)
         {
-            _driver = driver;
+            this.driver = driver;
         }
 
         public string ExecuteScript(string script, params object[] args)
         {
-            return _driver.ExecuteJavaScript<string>(script, args);
+            return driver.ExecuteJavaScript<string>(script, args);
         }
 
         public T ExecuteScript<T>(string script, params object[] args)
         {
-            return _driver.ExecuteJavaScript<T>(script, args);
+            return driver.ExecuteJavaScript<T>(script, args);
         }
 
         public string GetCurrentPageUrl()
         {
-            return _driver.Url;
+            return driver.Url;
         }
 
         public string GetDocumentHtml()
@@ -45,7 +46,7 @@ namespace Framework.Base
         public WebElement GetElementClickable(By locator, int timeoutInSeconds = DefaultTimeout)
         {
             IWebElement element;
-            var wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(timeoutInSeconds));
+            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(timeoutInSeconds));
             try
             {
                 element = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(locator));
@@ -55,12 +56,12 @@ namespace Framework.Base
                 Console.WriteLine($"Locator: '{locator}'. Exception ---\n{exc.StackTrace}");
                 throw new NoSuchElementException();
             }
-            return new WebElement(_driver, element);
+            return new WebElement(driver, element);
         }
 
         public WebElement GetElementExists(By locator, int timeoutInSeconds = DefaultTimeout)
         {
-            var wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(timeoutInSeconds));
+            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(timeoutInSeconds));
             IWebElement element;
             try
             {
@@ -71,12 +72,12 @@ namespace Framework.Base
                 Console.WriteLine($"Locator: '{locator}'. Exception ---\n{exc.StackTrace}");
                 throw new NoSuchElementException();
             }
-            return new WebElement(_driver, element);
+            return new WebElement(driver, element);
         }
 
         public WebElement GetElementVisible(By locator, int timeoutInSeconds = DefaultTimeout)
         {
-            var wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(timeoutInSeconds));
+            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(timeoutInSeconds));
             IWebElement element;
             try
             {
@@ -87,13 +88,13 @@ namespace Framework.Base
                 Console.WriteLine($"Locator: '{locator}'. Exception ---\n{exc.StackTrace}");
                 throw new NoSuchElementException();
             }
-            return new WebElement(_driver, element);
+            return new WebElement(driver, element);
         }
 
         public ReadOnlyCollection<IWebElement> GetElements(By locator)
         {
             WaitForPageReadyStateComplete();
-            return _driver.FindElements(locator);
+            return driver.FindElements(locator);
         }
 
         public string GetPageLanguage()
@@ -103,7 +104,7 @@ namespace Framework.Base
 
         public void GoToUrl(string url)
         {
-            _driver.Navigate().GoToUrl(url);
+            driver.Navigate().GoToUrl(url);
         }
 
         public bool IsBlockVisible(IList<FieldValueDto> dataSet, By blockLocator, Func<FieldValueDto, By> getBlockItem)
@@ -139,7 +140,7 @@ namespace Framework.Base
 
         public bool IsElementNotVisible(By locator, int timeoutInSeconds = DefaultTimeout)
         {
-            var wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(timeoutInSeconds));
+            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(timeoutInSeconds));
             var isInvisible = false;
             try
             {
@@ -169,7 +170,7 @@ namespace Framework.Base
 
         public void NavigateBack()
         {
-            _driver.Navigate().Back();
+            driver.Navigate().Back();
         }
 
         public void OpenNewTab(ScenarioContext scenarioContext)
@@ -178,9 +179,14 @@ namespace Framework.Base
             SwitchToNewWindow(scenarioContext);
         }
 
+        public void PressKeys(string keys)
+        {
+            new Actions(driver).SendKeys(GetElementVisible(By.XPath("//body")).Element, keys).Perform();
+        }
+
         public void Refresh()
         {
-            _driver.Navigate().Refresh();
+            driver.Navigate().Refresh();
         }
 
         public void ScrollToElement(IWebElement element)
@@ -191,7 +197,7 @@ namespace Framework.Base
                                              + "window.scrollBy(0, elementTop-(viewPortHeight/2));";
             try
             {
-                _driver.ExecuteJavaScript(scrollElementInto, element);
+                driver.ExecuteJavaScript(scrollElementInto, element);
             }
             catch (Exception exc)
             {
@@ -201,46 +207,46 @@ namespace Framework.Base
 
         public void SwitchToDefaultContent()
         {
-            _driver.SwitchTo().DefaultContent();
+            driver.SwitchTo().DefaultContent();
         }
 
         public void SwitchToIframe(By locator)
         {
-            _driver.SwitchTo().Frame(GetElementClickable(locator).Element);
+            driver.SwitchTo().Frame(GetElementClickable(locator).Element);
         }
 
         public void SwitchToMainWindow(ScenarioContext scenarioContext)
         {
             var handles = (IList<string>)scenarioContext.GetContextKey(ContextKey.WindowHandles);
-            _driver.SwitchTo().Window(handles?.First());
+            driver.SwitchTo().Window(handles?.First());
         }
 
         public void SwitchToNewWindow(ScenarioContext scenarioContext)
         {
             var handles = (IList<string>)scenarioContext.GetContextKey(ContextKey.WindowHandles);
-            var newHandle = _driver.WindowHandles.First(handle => !handles.Contains(handle));
+            var newHandle = driver.WindowHandles.First(handle => !handles.Contains(handle));
             handles.Add(newHandle);
             scenarioContext.SetContextKey(ContextKey.WindowHandles, handles);
-            _driver.SwitchTo().Window(newHandle);
+            driver.SwitchTo().Window(newHandle);
             if (ConfigReader.BrowserType.Equals(Browser.IE))
             {
-                _driver.Manage().Window.Maximize();
+                driver.Manage().Window.Maximize();
             }
         }
 
         public void SwitchToLastWindow(ScenarioContext scenarioContext)
         {
             var handles = (IList<string>)scenarioContext.GetContextKey(ContextKey.WindowHandles);
-            _driver.SwitchTo().Window(handles.Last());
+            driver.SwitchTo().Window(handles.Last());
         }
 
         public void SwitchToPreviousWindow(ScenarioContext scenarioContext)
         {
             var handles = (IList<string>)scenarioContext.GetContextKey(ContextKey.WindowHandles);
             var previousHandle = handles.Count > 2
-                ? handles[handles.Count - 2]
-                : handles[handles.Count - 1];
-            _driver.SwitchTo().Window(previousHandle);
+                ? handles[^2]
+                : handles[^1];
+            driver.SwitchTo().Window(previousHandle);
         }
 
         public void WaitForPageReadyStateComplete()

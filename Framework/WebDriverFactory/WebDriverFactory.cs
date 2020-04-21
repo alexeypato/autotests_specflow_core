@@ -14,9 +14,8 @@ using WebDriverManager.DriverConfigs.Impl;
 
 namespace Framework.WebDriverFactory
 {
-    public static class WebDriver
+    public static class WebDriverFactory
     {
-        private static Config ConfigInstance => Config.Instance;
         private static string DownloadsDir => $"{ConfigReader.BaseDirectory}{Path.DirectorySeparatorChar}downloads";
 
         public static IWebDriver GetWebDriver(Browser browser)
@@ -54,9 +53,8 @@ namespace Framework.WebDriverFactory
         private static ChromeOptions GetChromeOptions()
         {
             var options = new ChromeOptions();
-            options.AddArgument("--headless");
+            //options.AddArgument("--headless");
             options.AddArguments("--no-sandbox", "--disable-gpu", "--disable-dev-shm-usage");
-            options.AddUserProfilePreference("intl.accept_languages", ConfigInstance.Language);
             options.AddUserProfilePreference("disable-popup-blocking", "true");
             options.AddUserProfilePreference("download.prompt_for_download", "false");
             options.AddUserProfilePreference("download.default_directory", DownloadsDir);
@@ -83,16 +81,15 @@ namespace Framework.WebDriverFactory
             firefoxProfile.SetPreference("profile.assume_untrusted_issuer", true);
             firefoxProfile.SetPreference("profile.accept_untrusted_certs", true);
             firefoxProfile.SetPreference("dom.successive_dialog_time_limit", 0);
-            firefoxProfile.SetPreference("intl.accept_languages", ConfigInstance.Language);
 
             var options = new FirefoxOptions { Profile = firefoxProfile };
+            options.AddArgument("-headless");
             options.SetLoggingPreference(LogType.Driver, LogLevel.Off);
             options.SetLoggingPreference(LogType.Browser, LogLevel.Off);
             options.SetLoggingPreference(LogType.Client, LogLevel.Off);
             options.SetLoggingPreference(LogType.Profiler, LogLevel.Off);
             options.SetLoggingPreference(LogType.Server, LogLevel.Off);
             options.LogLevel = FirefoxDriverLogLevel.Default;
-            options.AddArgument("-headless");
 
             return options;
         }

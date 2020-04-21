@@ -50,32 +50,32 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Resources\Google\HomePageRes.Designer.cs">
+    <Compile Update="Resources\Google\GooglePageRes.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>HomePageRes.resx</DependentUpon>
+      <DependentUpon>GooglePageRes.resx</DependentUpon>
     </Compile>
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Resources\Google\HomePageRes.NL.resx">
+    <EmbeddedResource Update="Resources\Google\GooglePageRes.NL.resx">
       <LastGenOutput>SignUpPage.Designer.cs</LastGenOutput>
       <Generator>ResXFileCodeGenerator</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Resources\Google\HomePageRes.BE.resx">
+    <EmbeddedResource Update="Resources\Google\GooglePageRes.BE.resx">
       <LastGenOutput>SignUpPage.Designer.cs</LastGenOutput>
       <Generator>ResXFileCodeGenerator</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Resources\Google\HomePageRes.FR.resx">
+    <EmbeddedResource Update="Resources\Google\GooglePageRes.FR.resx">
       <LastGenOutput>SignUpPage.Designer.cs</LastGenOutput>
       <Generator>ResXFileCodeGenerator</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Resources\Google\HomePageRes.RU.resx">
+    <EmbeddedResource Update="Resources\Google\GooglePageRes.RU.resx">
       <LastGenOutput>SignUpPage.Designer.cs</LastGenOutput>
       <Generator>ResXFileCodeGenerator</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Resources\Google\HomePageRes.resx">
-      <LastGenOutput>HomePageRes.Designer.cs</LastGenOutput>
+    <EmbeddedResource Update="Resources\Google\GooglePageRes.resx">
+      <LastGenOutput>GooglePageRes.Designer.cs</LastGenOutput>
       <Generator>ResXFileCodeGenerator</Generator>
     </EmbeddedResource>
   </ItemGroup>

@@ -49,7 +49,7 @@ variables:
   project: '**/*Tests/*.csproj'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Debug'
-  allureResults: '$(System.DefaultWorkingDirectory)/ProjectTests/bin/Debug/netcoreapp3.1/'
+  allureResults: '$(System.DefaultWorkingDirectory)/ProjectTests/bin/$(buildConfiguration)/netcoreapp3.1/'
   allureVersion: '2.13.2'
 
 steps:

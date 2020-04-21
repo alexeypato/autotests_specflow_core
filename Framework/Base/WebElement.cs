@@ -16,7 +16,7 @@ namespace Framework.Base
 {
     public class WebElement : IWebElement
     {
-        private readonly IWebDriver _driver;
+        private readonly IWebDriver driver;
 
         public readonly IWebElement Element;
 
@@ -41,7 +41,7 @@ namespace Framework.Base
         public WebElement(IWebDriver driver, IWebElement webElement)
         {
             Element = webElement;
-            _driver = driver;
+            this.driver = driver;
         }
 
         public void AcceptAllFileTypes()
@@ -52,7 +52,7 @@ namespace Framework.Base
             ScrollIntoView();
             try
             {
-                _driver.ExecuteJavaScript("arguments[0].accept = 'image/*, video/*, application/*, text/*';", Element);
+                driver.ExecuteJavaScript("arguments[0].accept = 'image/*, video/*, application/*, text/*';", Element);
             }
             catch (Exception exc)
             {
@@ -62,7 +62,7 @@ namespace Framework.Base
 
         public void Blur()
         {
-            _driver.ExecuteJavaScript("arguments[0].blur();", Element);
+            driver.ExecuteJavaScript("arguments[0].blur();", Element);
         }
 
         public void Clear()
@@ -92,14 +92,14 @@ namespace Framework.Base
 
         public void ClickByJs()
         {
-            _driver.ExecuteJavaScript("arguments[0].click();", Element);
+            driver.ExecuteJavaScript("arguments[0].click();", Element);
         }
 
         public void DisplayElement()
         {
             try
             {
-                _driver.ExecuteJavaScript("arguments[0].style.display = 'block';", Element);
+                driver.ExecuteJavaScript("arguments[0].style.display = 'block';", Element);
             }
             catch (Exception exc)
             {
@@ -114,7 +114,7 @@ namespace Framework.Base
 
         public WebElement FindWebElement(By by)
         {
-            return new WebElement(_driver, FindElement(by));
+            return new WebElement(driver, FindElement(by));
         }
 
         public ReadOnlyCollection<IWebElement> FindElements(By by)
@@ -124,7 +124,7 @@ namespace Framework.Base
 
         public void Focus()
         {
-            _driver.ExecuteJavaScript("arguments[0].focus();", Element);
+            driver.ExecuteJavaScript("arguments[0].focus();", Element);
         }
 
         public string GetAttribute(string attributeName)
@@ -152,12 +152,12 @@ namespace Framework.Base
 
         public string GetTextByJs()
         {
-            return _driver.ExecuteJavaScript<string>("return arguments[0].textContent;", Element);
+            return driver.ExecuteJavaScript<string>("return arguments[0].textContent;", Element);
         }
 
         public void MoveToElement()
         {
-            var actions = new Actions(_driver);
+            var actions = new Actions(driver);
             actions.MoveToElement(Element);
             actions.Perform();
         }
@@ -166,7 +166,7 @@ namespace Framework.Base
         {
             try
             {
-                _driver.ExecuteJavaScript("arguments[0].scrollIntoView(true);", Element);
+                driver.ExecuteJavaScript("arguments[0].scrollIntoView(true);", Element);
             }
             catch (Exception exc)
             {
@@ -203,7 +203,7 @@ namespace Framework.Base
         {
             ClearText();
             Thread.Sleep(TimeSpan.FromSeconds((int)TimeoutValue.Low));
-            _driver.ExecuteJavaScript($"arguments[0].value = '{text}';", Element);
+            driver.ExecuteJavaScript($"arguments[0].value = '{text}';", Element);
             Thread.Sleep(TimeSpan.FromSeconds((int)TimeoutValue.Low));
             SendKeys(Keys.Right);
             SendKeys(" ");
@@ -264,7 +264,7 @@ namespace Framework.Base
 
         private bool IsChecked()
         {
-            return bool.Parse(_driver.ExecuteJavaScript<string>("return arguments[0].checked;", Element));
+            return bool.Parse(driver.ExecuteJavaScript<string>("return arguments[0].checked;", Element));
         }
 
         private void SendKeysWithDelay(string text, int delay = 100)
