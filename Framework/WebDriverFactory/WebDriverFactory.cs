@@ -53,7 +53,7 @@ namespace Framework.WebDriverFactory
         private static ChromeOptions GetChromeOptions()
         {
             var options = new ChromeOptions();
-            //options.AddArgument("--headless");
+            options.AddArgument("--headless");
             options.AddArguments("--no-sandbox", "--disable-gpu", "--disable-dev-shm-usage");
             options.AddUserProfilePreference("disable-popup-blocking", "true");
             options.AddUserProfilePreference("download.prompt_for_download", "false");

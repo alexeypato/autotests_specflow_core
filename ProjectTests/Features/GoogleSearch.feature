@@ -9,7 +9,7 @@ Background:
 
 @UiTest
 Scenario: Searching for unknown term
-    When I set '124334sdgdsafgsdfg2323424' to the search field
+    When I set 'waw4f34f34erv3434we4aw4w4wa4aw4g44' to the search field
         And  I press 'Enter'
     Then I expect that search element is hidden
 
